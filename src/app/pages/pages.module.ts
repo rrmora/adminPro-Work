@@ -12,6 +12,7 @@ import { PAGES_ROTES } from './pages.routes';
 // Temporal
 import { IncrementadorComponent } from '../components/incrementador/incrementador.component';
 import { GraficaDonaComponent } from './graficas/grafica-dona/grafica-dona.component';
+import { AccountSettingComponent } from './account-setting/account-setting.component';
 
 
 @NgModule({
@@ -21,7 +22,8 @@ import { GraficaDonaComponent } from './graficas/grafica-dona/grafica-dona.compo
         ProgressComponent,
         GraficasComponent,
         IncrementadorComponent,
-        GraficaDonaComponent
+        GraficaDonaComponent,
+        AccountSettingComponent
     ],
     exports: [
         PagesComponent,
