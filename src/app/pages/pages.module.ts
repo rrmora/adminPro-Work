@@ -13,6 +13,8 @@ import { PAGES_ROTES } from './pages.routes';
 import { IncrementadorComponent } from '../components/incrementador/incrementador.component';
 import { GraficaDonaComponent } from './graficas/grafica-dona/grafica-dona.component';
 import { AccountSettingComponent } from './account-setting/account-setting.component';
+import { PromesasComponent } from './promesas/promesas.component';
+import { RxjsComponent } from './rxjs/rxjs.component';
 
 
 @NgModule({
@@ -23,7 +25,9 @@ import { AccountSettingComponent } from './account-setting/account-setting.compo
         GraficasComponent,
         IncrementadorComponent,
         GraficaDonaComponent,
-        AccountSettingComponent
+        AccountSettingComponent,
+        PromesasComponent,
+        RxjsComponent
     ],
     exports: [
         PagesComponent,
