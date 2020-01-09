@@ -38,7 +38,6 @@ export class ImagenPipe implements PipeTransform {
         nombre = `/usuario/${img}`;
       // url + '/usuario/xxx';
   }
-  console.log('Imagen Path: ', url + nombre);
   return url + nombre;
   }
 

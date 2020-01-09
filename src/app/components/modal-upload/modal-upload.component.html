@@ -1,0 +1,17 @@
+<ng-template #content let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">Profile update</h4>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+        <img *ngIf="!imgTemp" [src]="'xxx' | imagen" class="w150 text-center" height="50" width="50">
+        <img *ngIf="imgTemp" [src]="imgTemp" class="w150 text-center" height="50" width="50">
+        <input (change)="seleccionarImg($event.target.files[0])" type="file">
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Save</button>
+    </div>
+  </ng-template>
+

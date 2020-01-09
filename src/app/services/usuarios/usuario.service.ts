@@ -89,8 +89,10 @@ token: string;
     let url = URL_SERVICES + '/usuario/' + usuario._id;
     url += '?token=' + this.token;
     return this.http.put(url, usuario).pipe(map((result: any) => {
-      let userdb: Usuario = result.usuario;
-      this.guardarLocalStorage(userdb._id, this.token, userdb);
+      if (usuario._id === this.usuario._id) {
+        let userdb: Usuario = result.usuario;
+        this.guardarLocalStorage(userdb._id, this.token, userdb);
+      }
       Swal.fire('Usuario actualizado', usuario.nombre, 'success');
       return true;
     }));
@@ -108,4 +110,21 @@ token: string;
     });
   }
 
+  cargarUsuarios(desde: number = 0) {
+    let url = URL_SERVICES + '/usuario?desde=' + desde;
+    return this.http.get(url);
+  }
+
+  buscarUsuario(search: string) {
+    let url = URL_SERVICES + '/busqueda/coleccion/usuarios/' + search;
+    return this.http.get(url)
+    .pipe(map( (result: any) => result.usuarios)
+    );
+  }
+
+  borarUsuario(id: string) {
+    let url = URL_SERVICES + '/usuario/' + id;
+    url += '?token=' + this.token;
+    return this.http.delete(url);
+  }
 }
