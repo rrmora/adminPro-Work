@@ -16,7 +16,6 @@ usuario: Usuario;
 token: string;
   constructor(public http: HttpClient, public router: Router, public subirArchivoService: SubirArchivoService) {
     this.inicializarDeStorage();
-    console.log('Servicio usuario listo para usarse');
    }
 
    isLogged() {
