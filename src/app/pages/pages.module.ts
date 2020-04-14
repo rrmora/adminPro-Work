@@ -5,6 +5,12 @@ import { FormsModule } from '@angular/forms';
 import { SharedModule } from '../shared/shared.module';
 import { ChartsModule } from 'ng2-charts';
 import { PipesModule } from '../pipes/pipes.module';
+import { ReactiveFormsModule } from '@angular/forms';
+/// NGPrime \\\\\\
+import { TreeTableModule } from 'primeng/treetable';
+import {InputTextModule} from 'primeng/inputtext';
+import {ButtonModule} from 'primeng/button';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ProgressComponent } from './progress/progress.component';
@@ -49,9 +55,14 @@ import { ClientesComponent } from './clientes/clientes.component';
         CommonModule,
         SharedModule,
         PAGES_ROTES,
+        ReactiveFormsModule,
         FormsModule,
         ChartsModule,
-        PipesModule
+        PipesModule,
+        TreeTableModule,
+        InputTextModule,
+        ButtonModule,
+        FontAwesomeModule
     ]
 })
 

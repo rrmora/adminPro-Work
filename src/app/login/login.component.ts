@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, NgZone } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgForm } from '@angular/forms';
 import { UsuarioService } from '../services/usuarios/usuario.service';
@@ -18,7 +18,9 @@ export class LoginComponent implements OnInit {
   email: string;
   // Google
   auth2: any;
-  constructor(public _router: Router, public usuarioService: UsuarioService) { }
+  constructor(public _router: Router, 
+              public usuarioService: UsuarioService,
+              public ngZone: NgZone) { }
 
   ngOnInit() {
     init_plugin();
@@ -44,9 +46,11 @@ export class LoginComponent implements OnInit {
     this.auth2.attachClickHandler(element, {}, (googleUser) => {
       // let profile = googleUser.getBasicProfile();
       let token = googleUser.getAuthResponse().id_token;
-      this.usuarioService.loginGoogle(token).subscribe(result => {
-        this._router.navigate(['/dashboard']);
-      });
+      this.usuarioService.loginGoogle(token)
+      .subscribe(() => this.ngZone.run(() => this._router.navigate(['/dashboard'])));
+      // this.usuarioService.loginGoogle(token).subscribe(result => {
+      //   this._router.navigate(['/dashboard']);
+      // });
     });
   }
 

@@ -27,6 +27,7 @@ const pagesRoutes: Routes = [
             { path: 'perfil', component: ProfileComponent, data: { titulo: 'Perfil de usuario' }},
             { path: 'usuarios', component: UsuariosComponent, data: { titulo: 'Usuarios' }},
             { path: 'clientes', component: ClientesComponent, data: { titulo: 'Clientes' }},
+            { path: 'clientes/:id', component: ClientesComponent, data: { titulo: 'Clientes' }},
             { path: '', redirectTo: '/dashboard', pathMatch: 'full'}
         ]
     }

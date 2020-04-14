@@ -31,3 +31,11 @@
 .oculto {
     display: none;
 }
+
+.ui-inputtext {
+    color: grey !important;
+    font-weight: 500 !important;
+}
+.ui-inputtext:enabled:focus:not(.ui-state-error) {
+    border-color: #f4f6f9 !important;
+}
