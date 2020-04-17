@@ -1,22 +1,49 @@
-<div>
-  <p-treeTable [value]="files" [columns]="cols" [paginator]="true" [rows]="10">
-    <ng-template pTemplate="header" let-columns>
-        <tr>
-            <th *ngFor="let col of columns">
-                {{col.header}}
-            </th>
-            <th>Acciones</th>
-        </tr>
-    </ng-template>
-    <ng-template pTemplate="body" let-rowNode let-rowData="rowData" let-columns="columns">
-        <tr>
-            <td *ngFor="let col of columns; let i = index">
-                <p-treeTableToggler [rowNode]="rowNode" *ngIf="i == 0"></p-treeTableToggler>
-                <!-- <p-treeTableCheckbox [value]="rowNode" *ngIf="i == 0"></p-treeTableCheckbox>-->
-                {{rowData[col.field]}}
-            </td>
-            <td class="text-center" (click)="editar(rowNode)"><fa-icon [icon]="faEdit"></fa-icon></td>
-        </tr>            
-    </ng-template>
-  </p-treeTable>
+<div class="row animated fadeIn">
+    <div class="row col-lg-12">
+        <div class="col-12">
+            <div class="card" style="padding: 2%;">
+                <form [formGroup]="filters" novalidate>
+                    <div class="row mb-2">  
+                        <div class="col-3">
+                            <label class="lblCalendar" for="fechaInicio">Fecha Inicio: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+                            <p-calendar id="fechaInicio" formControlName="fechaInicio"></p-calendar>
+                        </div>
+                        <div class="col-3">
+                            <label class="lblCalendar" for="fechaFinal">Fecha Final: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+                            <p-calendar id="fechaFinal" formControlName="fechaFinal"></p-calendar>
+                        </div>
+                        <div class="col-3">
+                            <label class="lblCalendar" for="nombre">Nombre del cliente:</label>
+                            <input formControlName="nombre" id="apellidoM" type="text" pInputText> 
+                        </div>
+                        <div class="col-3">
+                            <button type="button" (click)="filter()" class="btn btn-outline-success float-left" style="margin-top: 9%;"><fa-icon [icon]="faFilter"></fa-icon> filtrar</button>                              
+                        </div>
+                    </div>
+                </form> 
+                <div>
+                  <p-treeTable [value]="files" [columns]="cols" [paginator]="true" [rows]="10">
+                    <ng-template pTemplate="header" let-columns>
+                        <tr>
+                            <th *ngFor="let col of columns">
+                                {{col.header}}
+                            </th>
+                            <th>Acciones</th>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-rowNode let-rowData="rowData" let-columns="columns">
+                        <tr>
+                            <td *ngFor="let col of columns; let i = index">
+                                <p-treeTableToggler [rowNode]="rowNode" *ngIf="i == 0"></p-treeTableToggler>
+                                <!-- <p-treeTableCheckbox [value]="rowNode" *ngIf="i == 0"></p-treeTableCheckbox>-->
+                                {{rowData[col.field]}}
+                            </td>
+                            <td class="text-center" (click)="editar(rowNode)"><fa-icon [icon]="faEdit"></fa-icon></td>
+                        </tr>            
+                    </ng-template>
+                  </p-treeTable>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

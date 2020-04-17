@@ -4,10 +4,10 @@ declare function init_plugin();
 @Component({
   selector: 'app-pagenotfound',
   templateUrl: './pagenotfound.component.html',
-  styles: []
+  styleUrls: ['pagenotfound.component.css']
 })
 export class PagenotfoundComponent implements OnInit {
-
+  fecha: number = new Date().getFullYear();   
   constructor() { }
 
   ngOnInit() {

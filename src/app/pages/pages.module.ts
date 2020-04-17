@@ -10,7 +10,9 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { TreeTableModule } from 'primeng/treetable';
 import {InputTextModule} from 'primeng/inputtext';
 import {ButtonModule} from 'primeng/button';
+import {CalendarModule} from 'primeng/calendar';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ProgressComponent } from './progress/progress.component';
@@ -62,7 +64,9 @@ import { ClientesComponent } from './clientes/clientes.component';
         TreeTableModule,
         InputTextModule,
         ButtonModule,
-        FontAwesomeModule
+        CalendarModule,
+        FontAwesomeModule,
+        BrowserAnimationsModule
     ]
 })
 

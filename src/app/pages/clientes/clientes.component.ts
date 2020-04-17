@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ClientesService } from '../../services/clientes/clientes.service';
 import { FormBuilder, FormArray, FormGroup } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
+import { faTrash, faPlus, faSave } from '@fortawesome/free-solid-svg-icons';
 
 
 @Component({
@@ -14,6 +15,7 @@ export class ClientesComponent implements OnInit {
   hascliente: boolean;
   id = '5e8021aedb715f43a0a22cbe';
   urlId: string;
+  faTrash = faTrash; faAdd = faPlus; faSave = faSave;
   constructor(private formBuilder: FormBuilder, 
               public clienteService: ClientesService,
               private route: ActivatedRoute

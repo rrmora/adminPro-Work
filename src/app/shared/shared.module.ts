@@ -6,11 +6,12 @@ import { HeaderComponent } from './header/header.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { BreadcrumbsComponent } from './breadcrumbs/breadcrumbs.component';
 import { PipesModule } from '../pipes/pipes.module';
+import {ButtonModule} from 'primeng/button';
 
 
 
 @NgModule({
-    imports: [RouterModule, CommonModule, PipesModule],
+    imports: [RouterModule, CommonModule, PipesModule, ButtonModule],
     declarations: [
         PagenotfoundComponent,
         HeaderComponent,

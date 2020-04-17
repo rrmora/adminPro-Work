@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Usuario } from '../../models/usuarios.model';
 import { HttpClient } from '@angular/common/http';
 import { URL_SERVICES } from '../../config/config';
-import { map } from 'rxjs/operators';
+import { map, catchError } from 'rxjs/operators';
 import 'sweetalert2/src/sweetalert2.scss';
 import Swal from 'sweetalert2';
 import { Router } from '@angular/router';
@@ -57,13 +57,14 @@ token: string;
       localStorage.removeItem('email');
     }
     let url = URL_SERVICES + '/login';
-    return this.http.post(url, usuario).pipe(map( (result: any) => {
-      this.guardarLocalStorage(result.id, result.token, result.usuario);
-      // localStorage.setItem('id', result.id);
-      // localStorage.setItem('token', result.token);
-      // localStorage.setItem('usuario', JSON.stringify(result.usuario));
-      return true;
-    })
+    return this.http.post(url, usuario).pipe(
+      map( (result: any) => {
+        this.guardarLocalStorage(result.id, result.token, result.usuario);
+        return true;
+      }), catchError ( error => {
+        console.log(error.error.mensaje);
+        throw 'Error ' + error;
+      }) 
     );
    }
 
