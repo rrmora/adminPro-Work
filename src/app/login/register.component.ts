@@ -64,7 +64,7 @@ export class RegisterComponent implements OnInit {
       this.forma.value.nombre,
       this.forma.value.email,
       this.forma.value.password,
-      'admin'
+      'USER_ROLE'
     );
 
     this.usuarioService.crearUsuario(usuario).subscribe((result: Usuario) => {

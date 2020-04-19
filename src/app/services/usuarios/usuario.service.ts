@@ -7,6 +7,8 @@ import 'sweetalert2/src/sweetalert2.scss';
 import Swal from 'sweetalert2';
 import { Router } from '@angular/router';
 import { SubirArchivoService } from '../archivo/subir-archivo.service';
+import { NotificacionesService } from '../notificaciones/notificaciones.service';
+
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +16,10 @@ import { SubirArchivoService } from '../archivo/subir-archivo.service';
 export class UsuarioService {
 usuario: Usuario;
 token: string;
-  constructor(public http: HttpClient, public router: Router, public subirArchivoService: SubirArchivoService) {
+  constructor(public http: HttpClient, public router: Router, 
+              public subirArchivoService: SubirArchivoService,
+              public toastrService: NotificacionesService
+              ) {
     this.inicializarDeStorage();
    }
 
@@ -62,7 +67,7 @@ token: string;
         this.guardarLocalStorage(result.id, result.token, result.usuario);
         return true;
       }), catchError ( error => {
-        console.log(error.error.mensaje);
+        this.toastrService.ErrorNotification('Error', error.error.mensaje)
         throw 'Error ' + error;
       }) 
     );
@@ -78,10 +83,14 @@ token: string;
 
   crearUsuario(usuario: Usuario) {
     let url = URL_SERVICES + '/usuario';
-    return this.http.post(url, usuario).pipe(map((result: Usuario) => {
-      Swal.fire('Usuario creado', result.email, 'success');
-      return result;
-    })
+    return this.http.post(url, usuario).pipe(
+      map((result: Usuario) => {
+          Swal.fire('Usuario creado', result.email, 'success');
+          return result;
+        }), catchError ( error => {
+          this.toastrService.ErrorNotification(error.error.mensaje, error.error.errors.message)
+          throw 'Error ' + error;
+        })
     );
   }
 

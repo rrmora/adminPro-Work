@@ -29,6 +29,7 @@ import { ProfileComponent } from './profile/profile.component';
 import { UsuariosComponent } from './usuarios/usuarios.component';
 import { ModalUploadComponent } from '../components/modal-upload/modal-upload.component';
 import { ClientesComponent } from './clientes/clientes.component';
+import { FiltersComponent } from '../components/filters/filters.component';
 
 
 @NgModule({
@@ -38,6 +39,7 @@ import { ClientesComponent } from './clientes/clientes.component';
         ProgressComponent,
         GraficasComponent,
         IncrementadorComponent,
+        FiltersComponent,
         GraficaDonaComponent,
         AccountSettingComponent,
         PromesasComponent,

@@ -1,0 +1,20 @@
+
+<form [formGroup]="filters" novalidate>
+    <div class="row mb-2">  
+        <div class="col-md-3 col-sm-6">
+            <label class="lblCalendar col-md-12" for="fechaInicio">Fecha Inicio: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+            <p-calendar class="col-md-12" id="fechaInicio" formControlName="fechaInicio"></p-calendar>
+        </div>
+        <div class="col-md-3 col-sm-6">
+            <label class="lblCalendar col-md-12" for="fechaFinal">Fecha Final: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+            <p-calendar class="col-md-12" id="fechaFinal" formControlName="fechaFinal"></p-calendar>
+        </div>
+        <div class="col-md-3">
+            <label  class="lblCalendar" for="nombre">Nombre del cliente:</label>
+            <input class="col-md-12" formControlName="nombre" id="apellidoM" type="text" pInputText> 
+        </div>
+        <div class="col-md-3">
+            <button type="button" (click)="filter()" class="btn btn-outline-success float-left" style="margin-top: 9%;"><fa-icon [icon]="faFilter"></fa-icon> filtrar</button>                              
+        </div>
+    </div>
+</form> 

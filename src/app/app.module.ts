@@ -11,7 +11,10 @@ import { RegisterComponent } from './login/register.component';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+// Dependecias de tereceros
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations'; 
+import { ToastrModule } from 'ngx-toastr';
 
 
 @NgModule({
@@ -27,6 +30,8 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
     FormsModule,
     ReactiveFormsModule,
     ServiceModule,
+    BrowserAnimationsModule,
+    ToastrModule.forRoot(),
     NgbModule
   ],
   providers: [],

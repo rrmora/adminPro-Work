@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { TreeNode } from 'primeng/api/treenode';
 import { ClientesService } from '../../services/clientes/clientes.service';
 import { map } from 'rxjs/operators';
-import { faEdit, faFilter } from '@fortawesome/free-solid-svg-icons';
+import { faEdit } from '@fortawesome/free-solid-svg-icons';
 import { FormGroup, FormBuilder } from '@angular/forms';
 
 @Component({
@@ -15,16 +15,11 @@ export class DashboardComponent implements OnInit {
   cols: any[];
   data =  [];
   id = '5e8021aedb715f43a0a22cbe';
-  faEdit = faEdit; faFilter = faFilter;
+  faEdit = faEdit;
   filters: FormGroup;
   constructor(public clientService: ClientesService, private fb: FormBuilder) { }
 
   ngOnInit() {
-    this.filters = this.fb.group({
-      fechaInicio: [new Date()],
-      fechaFinal: [new Date()],
-      nombre: ['']
-    })
     this.clientService.GetClients().pipe(
       map((value: any) => {
           value = value.clientes;

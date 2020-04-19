@@ -1,27 +1,8 @@
-<div class="row animated fadeIn">
-    <div class="row col-lg-12">
-        <div class="col-12">
-            <div class="card" style="padding: 2%;">
-                <form [formGroup]="filters" novalidate>
-                    <div class="row mb-2">  
-                        <div class="col-3">
-                            <label class="lblCalendar" for="fechaInicio">Fecha Inicio: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
-                            <p-calendar id="fechaInicio" formControlName="fechaInicio"></p-calendar>
-                        </div>
-                        <div class="col-3">
-                            <label class="lblCalendar" for="fechaFinal">Fecha Final: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
-                            <p-calendar id="fechaFinal" formControlName="fechaFinal"></p-calendar>
-                        </div>
-                        <div class="col-3">
-                            <label class="lblCalendar" for="nombre">Nombre del cliente:</label>
-                            <input formControlName="nombre" id="apellidoM" type="text" pInputText> 
-                        </div>
-                        <div class="col-3">
-                            <button type="button" (click)="filter()" class="btn btn-outline-success float-left" style="margin-top: 9%;"><fa-icon [icon]="faFilter"></fa-icon> filtrar</button>                              
-                        </div>
-                    </div>
-                </form> 
-                <div>
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-body" style="padding: 2%;">
+                <app-filters></app-filters>
                   <p-treeTable [value]="files" [columns]="cols" [paginator]="true" [rows]="10">
                     <ng-template pTemplate="header" let-columns>
                         <tr>
@@ -42,7 +23,6 @@
                         </tr>            
                     </ng-template>
                   </p-treeTable>
-                </div>
             </div>
         </div>
     </div>
