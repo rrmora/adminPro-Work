@@ -41,7 +41,8 @@ export class ClientesService {
   }
 
   GetClients(desde: number = 0) {
-    let url = URL_SERVICES + '/cliente?desde=' + desde;
+    let url = URL_SERVICES + '/cliente';
+    url += '?token=' + this.usuarioService.token;
     return this.http.get(url).pipe(
       map((value: any) => {
         value = value.clientes;
@@ -58,6 +59,7 @@ export class ClientesService {
 
   GetClientesFilter(data: any) {
     let url = URL_SERVICES + '/cliente/filter?fechaInicio=' + data.fechaInicio + '&fechaFinal=' + data.fechaFinal + '&nombre=' + data.nombre;
+    url += '&token=' + this.usuarioService.token;
     return this.http.get(url).pipe(
       map((value: any) => {
         value = value.clientes;
@@ -74,7 +76,7 @@ export class ClientesService {
 
   GetClientById(id: string) {
     let url = URL_SERVICES + '/cliente/' + id;
-    // url += '?token=' + this.usuarioService.token;
+    url += '?token=' + this.usuarioService.token;
     return this.http.get(url);
   }
 }

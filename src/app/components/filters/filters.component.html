@@ -13,8 +13,13 @@
             <label  class="lblCalendar" for="nombre">Nombre del cliente:</label>
             <input class="col-md-12" formControlName="nombre" id="apellidoM" type="text" pInputText> 
         </div>
-        <div class="col-md-3">
-            <button type="button" (click)="filter()" class="btn btn-outline-success float-left" style="margin-top: 9%;"><fa-icon [icon]="faFilter"></fa-icon> filtrar</button>                              
+        <div class="col-md-2">
+            <br>
+            <button type="button" (click)="filter()" class="btn btn-outline-success float-left"><fa-icon [icon]="faFilter"></fa-icon> filtrar</button>                              
+        </div>
+        <div class="col-md-1">
+            <br>
+            <button type="button" routerLink="/clientes" class="btn btn-outline-info float-left"><fa-icon [icon]="faPlusCircle"></fa-icon></button>                              
         </div>
     </div>
 </form> 

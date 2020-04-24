@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ClientesService } from '../../services/clientes/clientes.service';
 import { FormBuilder, FormArray, FormGroup } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
-import { faTrash, faPlus, faSave } from '@fortawesome/free-solid-svg-icons';
+import { faTrash, faPlus, faSave, faArrowAltCircleLeft } from '@fortawesome/free-solid-svg-icons';
 
 
 
@@ -16,7 +16,7 @@ export class ClientesComponent implements OnInit {
   hascliente: boolean;
   id: string;
   textBoton: string;
-  faTrash = faTrash; faAdd = faPlus; faSave = faSave;
+  faTrash = faTrash; faAdd = faPlus; faSave = faSave; faArrowAltCircleLeft = faArrowAltCircleLeft;
   constructor(private formBuilder: FormBuilder, 
               public clienteService: ClientesService,
               private route: ActivatedRoute

@@ -1,6 +1,6 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
-import { faFilter } from '@fortawesome/free-solid-svg-icons';
+import { faFilter, faPlusCircle } from '@fortawesome/free-solid-svg-icons';
 import { ClientesService } from '../../services/clientes/clientes.service';
 import * as moment from 'moment';
 
@@ -10,7 +10,7 @@ import * as moment from 'moment';
   styleUrls: ['./filters.component.css']
 })
 export class FiltersComponent implements OnInit {
-  faFilter = faFilter;
+  faFilter = faFilter; faPlusCircle = faPlusCircle;
   filters: FormGroup;
   initialDate = new Date();
   maxDate = new Date();
