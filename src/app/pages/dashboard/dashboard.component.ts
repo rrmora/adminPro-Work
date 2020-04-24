@@ -20,36 +20,25 @@ export class DashboardComponent implements OnInit {
   constructor(public clientService: ClientesService, private fb: FormBuilder) { }
 
   ngOnInit() {
-    this.clientService.GetClients().pipe(
-      map((value: any) => {
-          value = value.clientes;
-          let data = [];
-          value.forEach(element => {
-              let aux = element.data;
-              aux.data['_id'] = element._id;
-              data.push(element.data);
-          });
-          return data;
-      })
-  ).subscribe((result: any) => {
+    this.clientService.GetClients().subscribe((result: any) => {
     this.files = result;
   });
 
-  // this.clientService.GetClientById(this.id).subscribe(result => console.log(result));
-
     this.cols = [
-      { field: '_id', header: 'ID'},
+      // { field: '_id', header: 'ID'},
       { field: 'nombre', header: 'nombre' },
       { field: 'apellidoP', header: 'Apellido Paterno' },
-      { field: 'apellidoM', header: 'Apellido Materno' }
+      { field: 'apellidoM', header: 'Apellido Materno' },
+      { field: 'createdAt', header: 'Fecha' }
   ];
   }
   editar(item: any) {
     console.log(item);
   }
 
-  filter() {
-   console.log(this.filters.getRawValue());
+  filteResult(event) {
+   this.files = [];
+   this.files = event;
   }
 
 }
