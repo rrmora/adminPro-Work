@@ -26,6 +26,20 @@ export class ClientesService {
     );
   }
 
+  actualizarCliente(id: string, cliente: any) {
+    let url = URL_SERVICES + '/cliente/' + id;
+    // url += '?token=' + localStorage.getItem('token');
+    return this.http.put(url, cliente).pipe(
+      map((result: any) => {
+          this.toastrService.SuccesNotification('Cliente actualizado', 'Cliente actulizado con exito.')
+          return result;
+        }), catchError ( error => {
+          this.toastrService.ErrorNotification(error.error.mensaje, error.error.errors.message)
+          throw 'Error ' + error;
+        })
+    );
+  }
+
   GetClients(desde: number = 0) {
     let url = URL_SERVICES + '/cliente?desde=' + desde;
     return this.http.get(url).pipe(
@@ -60,7 +74,7 @@ export class ClientesService {
 
   GetClientById(id: string) {
     let url = URL_SERVICES + '/cliente/' + id;
-    url += '?token=' + this.usuarioService.token;
+    // url += '?token=' + this.usuarioService.token;
     return this.http.get(url);
   }
 }

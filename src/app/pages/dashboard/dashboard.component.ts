@@ -4,6 +4,7 @@ import { ClientesService } from '../../services/clientes/clientes.service';
 import { map } from 'rxjs/operators';
 import { faEdit } from '@fortawesome/free-solid-svg-icons';
 import { FormGroup, FormBuilder } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-dashboard',
@@ -17,7 +18,7 @@ export class DashboardComponent implements OnInit {
   id = '5e8021aedb715f43a0a22cbe';
   faEdit = faEdit;
   filters: FormGroup;
-  constructor(public clientService: ClientesService, private fb: FormBuilder) { }
+  constructor(public clientService: ClientesService, private fb: FormBuilder, private router: Router) { }
 
   ngOnInit() {
     this.clientService.GetClients().subscribe((result: any) => {
@@ -33,7 +34,14 @@ export class DashboardComponent implements OnInit {
   ];
   }
   editar(item: any) {
-    console.log(item);
+    if (item.parent) {
+      console.log('Hijo: ',item.parent.data._id);
+      this.router.navigate(['/clientes', item.parent.data._id]);
+    } else {
+      console.log('Padre: ',item.node.data._id);
+      this.router.navigate(['/clientes', item.node.data._id]);
+
+    }
   }
 
   filteResult(event) {
