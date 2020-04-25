@@ -3,6 +3,7 @@ import { Usuario } from 'src/app/models/usuarios.model';
 import { UsuarioService } from '../../services/service.index';
 import 'sweetalert2/src/sweetalert2.scss';
 import Swal from 'sweetalert2';
+import { faTrash, faSave } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-usuarios',
@@ -10,7 +11,7 @@ import Swal from 'sweetalert2';
   styles: []
 })
 export class UsuariosComponent implements OnInit {
-
+  faTrash = faTrash; faSave = faSave;
   usuarios: Usuario[] = [];
   desde: number = 0;
   totalRegistros: number = 0;

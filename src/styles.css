@@ -15,7 +15,8 @@
 }
 
 .w70 {
-    width: 60;
+    width: 40 !important;
+    text-align: center;
 }
 
 .fondoNegro {

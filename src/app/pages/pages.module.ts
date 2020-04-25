@@ -11,6 +11,8 @@ import { TreeTableModule } from 'primeng/treetable';
 import {InputTextModule} from 'primeng/inputtext';
 import {ButtonModule} from 'primeng/button';
 import {CalendarModule} from 'primeng/calendar';
+import {TableModule} from 'primeng/table';
+/////// Font Awesome \\\\\\\\\
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
@@ -67,6 +69,7 @@ import { FiltersComponent } from '../components/filters/filters.component';
         InputTextModule,
         ButtonModule,
         CalendarModule,
+        TableModule,
         FontAwesomeModule,
         BrowserAnimationsModule
     ]
