@@ -14,7 +14,7 @@ export class ClientesService {
 
   crearCliente(cliente: any) {
     let url = URL_SERVICES + '/cliente';
-    // url += '?token=' + localStorage.getItem('token');
+    url += '?token=' + this.usuarioService.token;
     return this.http.post(url, cliente).pipe(
       map((result: any) => {
           this.toastrService.SuccesNotification('Cliente agregado', 'Cliente agregado con exito.')
@@ -28,7 +28,7 @@ export class ClientesService {
 
   actualizarCliente(id: string, cliente: any) {
     let url = URL_SERVICES + '/cliente/' + id;
-    // url += '?token=' + localStorage.getItem('token');
+    url += '?token=' + this.usuarioService.token
     return this.http.put(url, cliente).pipe(
       map((result: any) => {
           this.toastrService.SuccesNotification('Cliente actualizado', 'Cliente actulizado con exito.')

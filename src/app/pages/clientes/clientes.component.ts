@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ClientesService } from '../../services/clientes/clientes.service';
 import { FormBuilder, FormArray, FormGroup } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { faTrash, faPlus, faSave, faArrowAltCircleLeft } from '@fortawesome/free-solid-svg-icons';
 
 
@@ -19,7 +19,8 @@ export class ClientesComponent implements OnInit {
   faTrash = faTrash; faAdd = faPlus; faSave = faSave; faArrowAltCircleLeft = faArrowAltCircleLeft;
   constructor(private formBuilder: FormBuilder, 
               public clienteService: ClientesService,
-              private route: ActivatedRoute
+              private route: ActivatedRoute,
+              private router: Router
               ) { }
   get f() { return this.dynamicForm.controls; }
   get c() { return this.f.children as FormArray; }
@@ -77,9 +78,9 @@ export class ClientesComponent implements OnInit {
     let value = this.dynamicForm.getRawValue();
     let obj = this.getObjec(value);
     if (this.hascliente) {
-        this.clienteService.actualizarCliente(this.id, obj).subscribe(result => console.log(result))
+        this.clienteService.actualizarCliente(this.id, obj).subscribe(result => this.resetForm());
     } else {
-        this.clienteService.crearCliente(obj).subscribe(result => { console.log(result);});
+        this.clienteService.crearCliente(obj).subscribe(result => this.resetForm());
     }
     console.log(obj);
     }
@@ -123,6 +124,11 @@ export class ClientesComponent implements OnInit {
       );
       final.data = finalObj;
     return final;
+  }
+
+  resetForm() {
+    this.dynamicForm.reset();
+    this.router.navigate(['/dashboard']);
   }
 
 }
