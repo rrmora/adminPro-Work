@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { TreeNode } from 'primeng/api/treenode';
 import { ClientesService } from '../../services/clientes/clientes.service';
-import { map } from 'rxjs/operators';
 import { faEdit } from '@fortawesome/free-solid-svg-icons';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -26,7 +25,6 @@ export class DashboardComponent implements OnInit {
   });
 
     this.cols = [
-      // { field: '_id', header: 'ID'},
       { field: 'nombre', header: 'nombre' },
       { field: 'apellidoP', header: 'Apellido Paterno' },
       { field: 'apellidoM', header: 'Apellido Materno' },
@@ -35,10 +33,8 @@ export class DashboardComponent implements OnInit {
   }
   editar(item: any) {
     if (item.parent) {
-      console.log('Hijo: ',item.parent.data._id);
       this.router.navigate(['/clientes', item.parent.data._id]);
     } else {
-      console.log('Padre: ',item.node.data._id);
       this.router.navigate(['/clientes', item.node.data._id]);
 
     }

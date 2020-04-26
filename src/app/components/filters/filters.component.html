@@ -1,24 +1,35 @@
 
 <form [formGroup]="filters" novalidate>
+    <br>
     <div class="row mb-2">  
-        <div class="col-md-3 col-sm-6">
-            <label class="lblCalendar col-md-12" for="fechaInicio">Fecha Inicio: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
-            <p-calendar class="col-md-12" [maxDate]="maxDate" id="fechaInicio" formControlName="fechaInicio"></p-calendar>
+        <div class="col-md-3 form-group">
+            <span class="ui-float-label">
+                <p-calendar [style]="{'width':'100%'}" [inputStyle]="{'width':'100%'}" [showButtonBar]="true" [maxDate]="maxDate" id="fechaInicio" formControlName="fechaInicio"></p-calendar>
+                <label [style]="{'width':'100%'}" for="fechaInicio">Fecha Inicio</label>
+            </span>
+           <!-- <label class="lblCalendar col-md-12" for="fechaInicio">Fecha Inicio: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+            <p-calendar class="col-md-12" [maxDate]="maxDate" id="fechaInicio" formControlName="fechaInicio"></p-calendar> -->
         </div>
-        <div class="col-md-3 col-sm-6">
-            <label class="lblCalendar col-md-12" for="fechaFinal">Fecha Final: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
-            <p-calendar class="col-md-12" [maxDate]="maxDate" id="fechaFinal" formControlName="fechaFinal"></p-calendar>
+        <div class="col-md-3 form-group">
+            <span class="ui-float-label">
+                <p-calendar [style]="{'width':'100%'}" [inputStyle]="{'width':'100%'}" [showButtonBar]="true" [maxDate]="maxDate" id="fechaFinal" formControlName="fechaFinal"></p-calendar>
+                <label [style]="{'width':'100%'}" for="fechaFinal">Fecha Final</label>
+            </span>
+            <!-- <label class="lblCalendar col-md-12" for="fechaFinal">Fecha Final: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+            <p-calendar class="col-md-12" [maxDate]="maxDate" id="fechaFinal" formControlName="fechaFinal"></p-calendar> -->
         </div>
-        <div class="col-md-3">
-            <label  class="lblCalendar" for="nombre">Nombre del cliente:</label>
-            <input class="col-md-12" formControlName="nombre" id="apellidoM" type="text" pInputText> 
+        <div class="col-md-3 form-group">
+            <span class="ui-float-label">
+                <input class="col-md-12" formControlName="nombre" id="nombre" type="text" pInputText> 
+                <label for="nombre">Nombre</label>
+            </span>
+            <!-- <input class="col-md-12" formControlName="nombre" id="apellidoM" type="text" pInputText> 
+            <label  class="lblCalendar" for="nombre">Nombre del cliente:</label> -->
         </div>
-        <div class="col-md-2">
-            <br>
+        <div class="col-md-2 form-group">
             <button type="button" (click)="filter()" class="btn btn-outline-success float-left"><fa-icon [icon]="faFilter"></fa-icon> filtrar</button>                              
         </div>
-        <div class="col-md-1">
-            <br>
+        <div class="col-md-1 form-group">
             <button type="button" routerLink="/clientes" class="btn btn-outline-info float-left"><fa-icon [icon]="faPlusCircle"></fa-icon></button>                              
         </div>
     </div>
