@@ -6,6 +6,7 @@ import { SharedModule } from '../shared/shared.module';
 import { ChartsModule } from 'ng2-charts';
 import { PipesModule } from '../pipes/pipes.module';
 import { ReactiveFormsModule } from '@angular/forms';
+import { DropdownModule } from 'primeng/dropdown';
 /// NGPrime \\\\\\
 import { TreeTableModule } from 'primeng/treetable';
 import {InputTextModule} from 'primeng/inputtext';
@@ -70,6 +71,7 @@ import { FiltersComponent } from '../components/filters/filters.component';
         ButtonModule,
         CalendarModule,
         TableModule,
+        DropdownModule,
         FontAwesomeModule,
         BrowserAnimationsModule
     ]

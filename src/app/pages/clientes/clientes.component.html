@@ -8,60 +8,175 @@
                         <h3 class="header-h3">Datos Personales</h3>
                         <br>
                         <div formGroupName="data" class="row">
-                            <div  class="form-group col-md-3">
+                            <div  class="form-group col-md-4">
                                 <span class="ui-float-label">
                                     <input class="col-md-12" formControlName="nombre" id="nombre" type="text" pInputText> 
                                     <label for="nombre">Nombre</label>
                                 </span>
                             </div>
-                            <div  class="form-group col-md-3">
+                            <div  class="form-group col-md-4">
                                 <span class="ui-float-label">
                                     <input class="col-md-12" formControlName="apellidoP" id="apellidoP" type="text" pInputText> 
                                     <label for="apellidoP">Appelido Paterno</label>
                                 </span>
                             </div>
-                            <div  class="form-group col-md-3">
+                            <div  class="form-group col-md-4">
                                 <span class="ui-float-label">
                                     <input class="col-md-12" formControlName="apellidoM" id="apellidoM" type="text" pInputText> 
                                     <label for="apellidoM">Apellido Materno</label>
                                 </span>
                             </div>
-                            <div  class="form-group col-md-3">
+                        </div>
+                        <div formGroupName="data" class="row">
+                            <div  class="form-group col-md-4">
                                 <span class="ui-float-label">
-                                    <input class="col-md-12" formControlName="noPasaporte" id="noPasaporte" type="text" pInputText> 
-                                    <label for="noPasaporte">No. Pasaporte</label>
+                                    <input class="col-md-12" formControlName="correo" id="correo" type="text" pInputText> 
+                                    <label for="correo">Correo</label>
+                                </span>
+                            </div>
+                            <div  class="form-group col-md-4">
+                                <span class="ui-float-label">
+                                    <input class="col-md-12" formControlName="telefono" id="telefono" type="text" pInputText> 
+                                    <label for="telefono">Telefono</label>
+                                </span>
+                            </div>
+                            <div  class="form-group col-md-4">
+                                <span class="ui-float-label">
+                                    <p-calendar [style]="{'width':'100%'}" [inputStyle]="{'width':'100%'}" [showButtonBar]="true" [maxDate]="maxDate" id="fechaNacimiento" formControlName="fechaNacimiento"></p-calendar>
+                                    <label [style]="{'width':'100%'}" for="fechaNacimiento">Fecha Nacimiento</label>
                                 </span>
                             </div>
                         </div>
+                        <h3 class="header-h3">Datos Pasaporte y Visa</h3>
+                        <br>
+                        <div formGroupName="data" class="row">
+                            <div  class="form-group col-md-4">
+                                <span class="ui-float-label">
+                                    <p-dropdown [style]="{'width':'100%'}" [options]="estatus" optionLabel="nombre" datakey="id" formControlName="estatus"></p-dropdown>                                    
+                                    <label for="estatus">Seleccionar estatus</label>
+                                </span>
+                            </div>
+                            <div  class="form-group col-md-4">
+                                <span class="ui-float-label">
+                                    <input class="col-md-12" formControlName="noPasaporte" id="noPasaporte" type="text" pInputText> 
+                                    <label for="noPasaporte">No. pasaporte</label>
+                                </span>
+                            </div>
+                            <div  class="form-group col-md-4">
+                                <span class="ui-float-label">
+                                    <p-calendar [style]="{'width':'100%'}" [inputStyle]="{'width':'100%'}" [showButtonBar]="true" [maxDate]="maxDate" id="fechaCitaPasaporte" formControlName="fechaCitaPasaporte"></p-calendar>
+                                    <label [style]="{'width':'100%'}" for="fechaCitaPasaporte">Fecha cita pasaporte</label>
+                                </span>
+                            </div>
+                        </div>
+                        <div formGroupName="data" class="row">
+                            <div  class="form-group col-md-4">
+                                <span class="ui-float-label">
+                                    <input class="col-md-12" formControlName="ds160" id="ds160" type="text" pInputText> 
+                                    <label for="ds160">No. DS160</label>
+                                </span>
+                            </div>
+                            <div  class="form-group col-md-4">
+                                <span class="ui-float-label">
+                                    <p-dropdown [style]="{'width':'100%'}" [options]="estatusVisa" optionLabel="nombre" datakey="id" formControlName="estatusVisa"></p-dropdown>                                    
+                                    <label for="estatusVisa">Seleccionar estatus visa</label>
+                                </span>
+                            </div>
+                            <div  class="form-group col-md-4">
+                                <span class="ui-float-label">
+                                    <p-calendar [style]="{'width':'100%'}" [inputStyle]="{'width':'100%'}" [showButtonBar]="true" [maxDate]="maxDate" id="fechaCitaVisa" formControlName="fechaCitaVisa"></p-calendar>
+                                    <label [style]="{'width':'100%'}" for="fechaCitaVisa">Fecha cita visa</label>
+                                </span>
+                            </div>
+                        </div>
+                        <br>
                     </div>
                     <div *ngFor="let cliente of c.controls; let i = index" class="list-group list-group-flush">
                         <div class="form-body">
-                            <h3 class="header-h3">Datos Personales</h3>
-                            <br>
                             <div [formGroup]="cliente" class="row">
-                                <div  class="form-group col-md-3">
-                                    <span class="ui-float-label">
-                                        <input class="col-md-12" formControlName="nombre" id="nombre" type="text" pInputText> 
-                                        <label for="nombre">Nombre</label>
-                                    </span>
+                                <h3 class="header-h3 ml-4">Datos Personales</h3>
+                                <br><br>
+                                <div class="row col-md-12 m-0">
+                                    <div  class="form-group col-md-4">
+                                        <span class="ui-float-label">
+                                            <input class="col-md-12" formControlName="nombre" id="nombre" type="text" pInputText> 
+                                            <label for="nombre">Nombre</label>
+                                        </span>
+                                    </div>
+                                    <div  class="form-group col-md-4">
+                                        <span class="ui-float-label">
+                                            <input class="col-md-12" formControlName="apellidoP" id="apellidoP" type="text" pInputText> 
+                                            <label for="apellidoP">Appelido Paterno</label>
+                                        </span>
+                                    </div>
+                                    <div  class="form-group col-md-4">
+                                        <span class="ui-float-label">
+                                            <input class="col-md-12" formControlName="apellidoM" id="apellidoM" type="text" pInputText> 
+                                            <label for="apellidoM">Apellido Materno</label>
+                                        </span>
+                                    </div>
                                 </div>
-                                <div  class="form-group col-md-3">
-                                    <span class="ui-float-label">
-                                        <input class="col-md-12" formControlName="apellidoP" id="apellidoP" type="text" pInputText> 
-                                        <label for="apellidoP">Appelido Paterno</label>
-                                    </span>
+                                <div class="row col-md-12 m-0">
+                                    <div  class="form-group col-md-4">
+                                        <span class="ui-float-label">
+                                            <input class="col-md-12" formControlName="correo" id="correo" type="text" pInputText> 
+                                            <label for="correo">Correo</label>
+                                        </span>
+                                    </div>
+                                    <div  class="form-group col-md-4">
+                                        <span class="ui-float-label">
+                                            <input class="col-md-12" formControlName="telefono" id="telefono" type="text" pInputText> 
+                                            <label for="telefono">Telefono</label>
+                                        </span>
+                                    </div>
+                                    <div  class="form-group col-md-4">
+                                        <span class="ui-float-label">
+                                            <p-calendar [style]="{'width':'100%'}" [inputStyle]="{'width':'100%'}" [showButtonBar]="true" [maxDate]="maxDate" id="fechaNacimiento" formControlName="fechaNacimiento"></p-calendar>
+                                            <label [style]="{'width':'100%'}" for="fechaNacimiento">Fecha Nacimiento</label>
+                                        </span>
+                                    </div>
                                 </div>
-                                <div  class="form-group col-md-3">
-                                    <span class="ui-float-label">
-                                        <input class="col-md-12" formControlName="apellidoM" id="apellidoM" type="text" pInputText> 
-                                        <label for="apellidoM">Apellido Materno</label>
-                                    </span>
+                                <h3 class="header-h3 ml-4">Datos Pasaporte y Visa</h3>
+                                <br><br>
+                                <div class="row col-md-12 m-0">
+                                    <div  class="form-group col-md-4">
+                                        <span class="ui-float-label">
+                                            <p-dropdown [style]="{'width':'100%'}" [options]="estatus" optionLabel="nombre" datakey="id" formControlName="estatus"></p-dropdown>                                    
+                                            <label for="estatus">Seleccionar estatus</label>
+                                        </span>
+                                    </div>
+                                    <div  class="form-group col-md-4">
+                                        <span class="ui-float-label">
+                                            <input class="col-md-12" formControlName="noPasaporte" id="noPasaporte" type="text" pInputText> 
+                                            <label for="noPasaporte">No. pasaporte</label>
+                                        </span>
+                                    </div>
+                                    <div  class="form-group col-md-4">
+                                        <span class="ui-float-label">
+                                            <p-calendar [style]="{'width':'100%'}" [inputStyle]="{'width':'100%'}" [showButtonBar]="true" [maxDate]="maxDate" id="fechaCitaPasaporte" formControlName="fechaCitaPasaporte"></p-calendar>
+                                            <label [style]="{'width':'100%'}" for="fechaCitaPasaporte">Fecha cita pasaporte</label>
+                                        </span>
+                                    </div>
                                 </div>
-                                <div  class="form-group col-md-3">
-                                    <span class="ui-float-label">
-                                        <input class="col-md-12" formControlName="noPasaporte" id="noPasaporte" type="text" pInputText> 
-                                        <label for="noPasaporte">No. Pasaporte</label>
-                                    </span>
+                                <div class="row col-md-12 m-0">
+                                    <div  class="form-group col-md-4">
+                                        <span class="ui-float-label">
+                                            <input class="col-md-12" formControlName="ds160" id="ds160" type="text" pInputText> 
+                                            <label for="ds160">No. DS160</label>
+                                        </span>
+                                    </div>
+                                    <div  class="form-group col-md-4">
+                                        <span class="ui-float-label">
+                                            <p-dropdown [style]="{'width':'100%'}" [options]="estatusVisa" optionLabel="nombre" datakey="id" formControlName="estatusVisa"></p-dropdown>                                    
+                                            <label for="estatusVisa">Seleccionar estatus visa</label>
+                                        </span>
+                                    </div>
+                                    <div  class="form-group col-md-4">
+                                        <span class="ui-float-label">
+                                            <p-calendar [style]="{'width':'100%'}" [inputStyle]="{'width':'100%'}" [showButtonBar]="true" [maxDate]="maxDate" id="fechaCitaVisa" formControlName="fechaCitaVisa"></p-calendar>
+                                            <label [style]="{'width':'100%'}" for="fechaCitaVisa">Fecha cita visa</label>
+                                        </span>
+                                    </div>
                                 </div>
                             </div>
                             <div class="row">
