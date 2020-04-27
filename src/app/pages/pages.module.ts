@@ -33,6 +33,7 @@ import { UsuariosComponent } from './usuarios/usuarios.component';
 import { ModalUploadComponent } from '../components/modal-upload/modal-upload.component';
 import { ClientesComponent } from './clientes/clientes.component';
 import { FiltersComponent } from '../components/filters/filters.component';
+import { HeadEstatusComponent } from '../components/head-estatus/head-estatus.component';
 
 
 @NgModule({
@@ -43,6 +44,7 @@ import { FiltersComponent } from '../components/filters/filters.component';
         GraficasComponent,
         IncrementadorComponent,
         FiltersComponent,
+        HeadEstatusComponent,
         GraficaDonaComponent,
         AccountSettingComponent,
         PromesasComponent,

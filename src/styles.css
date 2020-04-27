@@ -52,3 +52,8 @@
     font-size: 14px !important;
     font-weight: 500 !important;
 }
+
+.headerText{
+    color: grey;
+    font-weight: 500;
+}
