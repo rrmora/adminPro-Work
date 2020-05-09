@@ -13,6 +13,7 @@ import {InputTextModule} from 'primeng/inputtext';
 import {ButtonModule} from 'primeng/button';
 import {CalendarModule} from 'primeng/calendar';
 import {TableModule} from 'primeng/table';
+import {InputTextareaModule} from 'primeng/inputtextarea';
 /////// Font Awesome \\\\\\\\\
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -34,6 +35,7 @@ import { ModalUploadComponent } from '../components/modal-upload/modal-upload.co
 import { ClientesComponent } from './clientes/clientes.component';
 import { FiltersComponent } from '../components/filters/filters.component';
 import { HeadEstatusComponent } from '../components/head-estatus/head-estatus.component';
+import { DashboardClientesVianeyComponent } from './dashboard-clientes-vianey/dashboard-clientes-vianey.component';
 
 
 @NgModule({
@@ -52,7 +54,8 @@ import { HeadEstatusComponent } from '../components/head-estatus/head-estatus.co
         ProfileComponent,
         UsuariosComponent,
         ModalUploadComponent,
-        ClientesComponent
+        ClientesComponent,
+        DashboardClientesVianeyComponent
     ],
     exports: [
         PagesComponent,
@@ -73,6 +76,7 @@ import { HeadEstatusComponent } from '../components/head-estatus/head-estatus.co
         ButtonModule,
         CalendarModule,
         TableModule,
+        InputTextareaModule,
         DropdownModule,
         FontAwesomeModule,
         BrowserAnimationsModule

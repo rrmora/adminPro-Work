@@ -1,0 +1,123 @@
+<div class="row">
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-body">
+                <h3 class="card-title">Clientes</h3>
+                <p-table [value]="clientes" [rows]="10" [paginator]="true">
+                    <ng-template pTemplate="header">
+                        <tr>
+                            <th>Nombre</th>
+                            <th>Apellidos</th>
+                            <th>Tipo venta</th>
+                            <th class="w70">Acciones</th>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-cliente>
+                        <tr>
+                            <td>{{cliente.nombre}}</td>
+                            <td>{{cliente.apellido}}</td>
+                            <td>{{cliente.tipoVenta}}</td>
+                            <td class="w70">
+                                <button (click)="borrarCliente(cliente)" style="margin-right: 2px;" class="btn btn-outline-danger btn-sm">
+                                    <fa-icon [icon]="faTrash"></fa-icon>
+                                </button>
+                                <button (click)="actulizarCliente(cliente)" style="margin-left: 2px;" class="btn btn-outline-success btn-sm">
+                                    <fa-icon [icon]="faDollarSign"></fa-icon>
+                                </button>                                 
+                                <button (click)="actulizarCliente(cliente)" style="margin-left: 2px;" class="btn btn-outline-info btn-sm">
+                                    <fa-icon [icon]="faTags"></fa-icon>
+                                </button> 
+                            </td>
+                        </tr>
+                    </ng-template>
+                </p-table>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-body">
+                <h3 class="card-title">Venta</h3>
+                <h6 class="headerTextVianey">Datos personales</h6><br>                                
+                <form [formGroup]="fomCliente" novalidate>
+                    <div class="form-body">
+                        <div class="row">
+                            <div  class="form-group col-md-4">
+                                <span class="ui-float-label">
+                                    <input class="col-md-12" formControlName="nombre" id="nombre" type="text" pInputText> 
+                                    <label for="nombre">Nombre</label>
+                                </span>
+                            </div>
+                            <div  class="form-group col-md-4">
+                                <span class="ui-float-label">
+                                    <input class="col-md-12" formControlName="apellido" id="apellido" type="text" pInputText> 
+                                    <label for="apellido">Apellido</label>
+                                </span>
+                            </div>
+                            <div  class="form-group col-md-4">
+                                <span class="ui-float-label">
+                                    <input class="col-md-12" formControlName="tipoVenta" id="tipoVenta" type="text" pInputText> 
+                                    <label for="tipoVenta">Tipo venta</label>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div *ngFor="let producto of p.controls; let i = index" class="list-group list-group-flush">
+                        <h6 class="headerTextVianey">Datos del producto</h6> <br>
+                        <div class="form-body">
+                            <div [formGroup]="producto" class="row">
+                                <div class="row col-md-12 m-0">
+                                    <div  class="form-group col-md-6">
+                                        <span class="ui-float-label">
+                                            <input class="col-md-12" formControlName="claveProducto" id="claveProducto" type="text" pInputText> 
+                                            <label for="claveProducto">clave Producto</label>
+                                        </span>
+                                    </div>
+                                    <div  class="form-group col-md-6">
+                                        <span class="ui-float-label">
+                                            <input class="col-md-12" formControlName="nombreProducto" id="nombreProducto" type="text" pInputText> 
+                                            <label for="nombreProducto">Nombre producto</label>
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="row col-md-12 m-0">
+                                    <div  class="form-group col-md-12">
+                                        <span class="ui-float-label">
+                                            <textarea class="col-md-12" formControlName="nombreProducto" id="nombreProducto" type="text" pInputText></textarea>
+                                            <label for="nombreProducto">Descripcion del producto</label>
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="row col-md-12 m-0">
+                                    <div  class="form-group col-md-6">
+                                        <span class="ui-float-label">
+                                            <input class="col-md-12" formControlName="precio" id="precio" type="text" pInputText> 
+                                            <label for="precio">Precio</label>
+                                        </span>
+                                    </div>
+                                    <div  class="form-group col-md-6">
+                                        <span class="ui-float-label">
+                                            <input class="col-md-12" formControlName="precioCliente" id="precioCliente" type="text" pInputText> 
+                                            <label for="precioCliente">Precio cliente</label>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <button type="button" (click)="eliminar(i)" class="btn btn-outline-danger float-right"><fa-icon [icon]="faTrash"></fa-icon></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <button type="button" (click)="save()" class="btn btn-outline-success float-right mt-3 ml-2"><fa-icon [icon]="faSave"></fa-icon> Guardar</button>
+                            <button type="button" (click)="agregarPedido()" class="btn btn-outline-info float-right mt-3 mr-2"><fa-icon [icon]="faAdd"></fa-icon> Producto</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
