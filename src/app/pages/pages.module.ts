@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+import {  CurrencyPipe } from '@angular/common';
 // Modulos
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -17,6 +18,7 @@ import {InputTextareaModule} from 'primeng/inputtextarea';
 /////// Font Awesome \\\\\\\\\
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ProgressComponent } from './progress/progress.component';
@@ -36,6 +38,7 @@ import { ClientesComponent } from './clientes/clientes.component';
 import { FiltersComponent } from '../components/filters/filters.component';
 import { HeadEstatusComponent } from '../components/head-estatus/head-estatus.component';
 import { DashboardClientesVianeyComponent } from './dashboard-clientes-vianey/dashboard-clientes-vianey.component';
+import { ModalComponent } from '../components/modal/modal.component';
 
 
 @NgModule({
@@ -55,6 +58,7 @@ import { DashboardClientesVianeyComponent } from './dashboard-clientes-vianey/da
         UsuariosComponent,
         ModalUploadComponent,
         ClientesComponent,
+        ModalComponent,
         DashboardClientesVianeyComponent
     ],
     exports: [
@@ -79,8 +83,10 @@ import { DashboardClientesVianeyComponent } from './dashboard-clientes-vianey/da
         InputTextareaModule,
         DropdownModule,
         FontAwesomeModule,
+        NgbModule,
         BrowserAnimationsModule
-    ]
+    ],
+    providers: [ CurrencyPipe ]
 })
 
 export class PagesModule {}

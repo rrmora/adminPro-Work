@@ -1,0 +1,106 @@
+<div class="col-md-12 form-group mb-3 mr-0">
+  <button type="button" (click)="openModal(modalContent)" class="btn btn-outline-success float-right"><fa-icon [icon]="faPlusCircle"></fa-icon> Cliente</button>
+</div>
+<ng-template #modalContent let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title">{{ modalTitle }}</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <h6 class="headerTextVianey">Datos personales</h6><br>
+    <form [formGroup]="formCliente" novalidate>
+        <div class="form-body">
+            <div class="row">
+                <div  class="form-group col-md-4">
+                    <span class="ui-float-label">
+                        <input class="col-md-12" formControlName="nombre" id="nombre" type="text" pInputText>
+                        <label for="nombre">Nombre</label>
+                    </span>
+                </div>
+                <div  class="form-group col-md-4">
+                    <span class="ui-float-label">
+                        <input class="col-md-12" formControlName="apellido" id="apellido" type="text" pInputText>
+                        <label for="apellido">Apellido</label>
+                    </span>
+                </div>
+                <div  class="form-group col-md-4">
+                    <span class="ui-float-label">
+                        <input class="col-md-12" formControlName="tipoVenta" id="tipoVenta" type="text" pInputText>
+                        <label for="tipoVenta">Tipo venta</label>
+                    </span>
+                </div>
+            </div>
+        </div>
+        <div *ngFor="let producto of p.controls; let i = index" class="list-group list-group-flush">
+            <h6 class="headerTextVianey">Datos del producto</h6> <br>
+            <div class="form-body">
+                <div [formGroup]="producto" class="row">
+                    <div class="row col-md-12 m-0">
+                        <div  class="form-group col-md-6">
+                            <span class="ui-float-label">
+                                <input class="col-md-12" formControlName="claveProducto" id="claveProducto" type="text" pInputText>
+                                <label for="claveProducto">clave Producto</label>
+                            </span>
+                        </div>
+                        <div  class="form-group col-md-6">
+                            <span class="ui-float-label">
+                                <input class="col-md-12" formControlName="nombreProducto" id="nombreProducto" type="text" pInputText>
+                                <label for="nombreProducto">Nombre producto</label>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="row col-md-12 m-0">
+                        <div  class="form-group col-md-12">
+                            <span class="ui-float-label">
+                                <textarea class="col-md-12" formControlName="nombreProducto" id="nombreProducto" type="text" pInputText></textarea>
+                                <label for="nombreProducto">Descripcion del producto</label>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="row col-md-12 m-0">
+                      <div  class="form-group col-md-4">
+                        <span class="ui-float-label">
+                            <input class="col-md-12" formControlName="cantidad" id="cantidad" type="number" pInputText>
+                            <label for="cantidad">Cantidad</label>
+                        </span>
+                    </div>
+                        <div  class="form-group col-md-4">
+                            <span class="ui-float-label">
+                                <input class="col-md-12" formControlName="precioUnidad" id="precioUnidad" type="number" pInputText>
+                                <label for="precioUnidad">Precio</label>
+                            </span>
+                        </div>
+                        <div  class="form-group col-md-4">
+                            <span class="ui-float-label">
+                                <input class="col-md-12" formControlName="precioCliente" id="precioCliente" type="number" pInputText>
+                                <label for="precioCliente">Precio cliente</label>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12" *ngIf="i !== 0">
+                        <button type="button" (click)="eliminar(i)" class="btn btn-outline-danger float-right"><fa-icon [icon]="faTrash"></fa-icon></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+          <h6 class="headerTextVianey col-lg-4">Cantidad: <strong>{{ cantidad }}</strong> </h6>
+          <h6 class="headerTextVianey col-lg-4">Total Proveedor: <strong>{{ totalSum | currency}}</strong> </h6>
+          <h6 class="headerTextVianey col-lg-4">Total Cliente: <strong>{{ totalSumCliente | currency }}</strong></h6>
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <button type="button" (click)="save()" class="btn btn-outline-success float-right mt-3 ml-2"><fa-icon [icon]="faSave"></fa-icon> Guardar</button>
+                <button type="button" (click)="agregarPedido()" class="btn btn-outline-info float-right mt-3 mr-2"><fa-icon [icon]="faAdd"></fa-icon> Producto</button>
+            </div>
+        </div>
+    </form>
+  </div>
+  <!--<div class="modal-footer">
+    <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button>
+  </div>-->
+</ng-template>

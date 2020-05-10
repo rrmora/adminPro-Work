@@ -1,8 +1,15 @@
 <div class="row">
-    <div class="col-md-6">
+    <div class="col-md-12">
         <div class="card">
             <div class="card-body">
-                <h3 class="card-title">Clientes</h3>
+              <div class="row mb-1">
+                <div class="col-md-6">
+                  <h3 class="card-title">Clientes</h3>
+                </div>
+                <div class="col-md-6">
+                  <app-modal></app-modal>
+                </div>
+              </div>
                 <p-table [value]="clientes" [rows]="10" [paginator]="true">
                     <ng-template pTemplate="header">
                         <tr>
@@ -23,10 +30,10 @@
                                 </button>
                                 <button (click)="actulizarCliente(cliente)" style="margin-left: 2px;" class="btn btn-outline-success btn-sm">
                                     <fa-icon [icon]="faDollarSign"></fa-icon>
-                                </button>                                 
+                                </button>
                                 <button (click)="actulizarCliente(cliente)" style="margin-left: 2px;" class="btn btn-outline-info btn-sm">
                                     <fa-icon [icon]="faTags"></fa-icon>
-                                </button> 
+                                </button>
                             </td>
                         </tr>
                     </ng-template>
@@ -34,29 +41,29 @@
             </div>
         </div>
     </div>
-    <div class="col-md-6">
+    <!-- <div class="col-md-6">
         <div class="card">
             <div class="card-body">
                 <h3 class="card-title">Venta</h3>
-                <h6 class="headerTextVianey">Datos personales</h6><br>                                
+                <h6 class="headerTextVianey">Datos personales</h6><br>
                 <form [formGroup]="fomCliente" novalidate>
                     <div class="form-body">
                         <div class="row">
                             <div  class="form-group col-md-4">
                                 <span class="ui-float-label">
-                                    <input class="col-md-12" formControlName="nombre" id="nombre" type="text" pInputText> 
+                                    <input class="col-md-12" formControlName="nombre" id="nombre" type="text" pInputText>
                                     <label for="nombre">Nombre</label>
                                 </span>
                             </div>
                             <div  class="form-group col-md-4">
                                 <span class="ui-float-label">
-                                    <input class="col-md-12" formControlName="apellido" id="apellido" type="text" pInputText> 
+                                    <input class="col-md-12" formControlName="apellido" id="apellido" type="text" pInputText>
                                     <label for="apellido">Apellido</label>
                                 </span>
                             </div>
                             <div  class="form-group col-md-4">
                                 <span class="ui-float-label">
-                                    <input class="col-md-12" formControlName="tipoVenta" id="tipoVenta" type="text" pInputText> 
+                                    <input class="col-md-12" formControlName="tipoVenta" id="tipoVenta" type="text" pInputText>
                                     <label for="tipoVenta">Tipo venta</label>
                                 </span>
                             </div>
@@ -69,13 +76,13 @@
                                 <div class="row col-md-12 m-0">
                                     <div  class="form-group col-md-6">
                                         <span class="ui-float-label">
-                                            <input class="col-md-12" formControlName="claveProducto" id="claveProducto" type="text" pInputText> 
+                                            <input class="col-md-12" formControlName="claveProducto" id="claveProducto" type="text" pInputText>
                                             <label for="claveProducto">clave Producto</label>
                                         </span>
                                     </div>
                                     <div  class="form-group col-md-6">
                                         <span class="ui-float-label">
-                                            <input class="col-md-12" formControlName="nombreProducto" id="nombreProducto" type="text" pInputText> 
+                                            <input class="col-md-12" formControlName="nombreProducto" id="nombreProducto" type="text" pInputText>
                                             <label for="nombreProducto">Nombre producto</label>
                                         </span>
                                     </div>
@@ -91,13 +98,13 @@
                                 <div class="row col-md-12 m-0">
                                     <div  class="form-group col-md-6">
                                         <span class="ui-float-label">
-                                            <input class="col-md-12" formControlName="precio" id="precio" type="text" pInputText> 
+                                            <input class="col-md-12" formControlName="precio" id="precio" type="text" pInputText>
                                             <label for="precio">Precio</label>
                                         </span>
                                     </div>
                                     <div  class="form-group col-md-6">
                                         <span class="ui-float-label">
-                                            <input class="col-md-12" formControlName="precioCliente" id="precioCliente" type="text" pInputText> 
+                                            <input class="col-md-12" formControlName="precioCliente" id="precioCliente" type="text" pInputText>
                                             <label for="precioCliente">Precio cliente</label>
                                         </span>
                                     </div>
@@ -119,5 +126,5 @@
                 </form>
             </div>
         </div>
-    </div>
+    </div> -->
 </div>
