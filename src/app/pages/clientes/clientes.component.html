@@ -2,7 +2,7 @@
     <div class="col-lg-12">
         <div class="card">
             <div class="card-body">
-                <button type="button" routerLink="/dashboard" class="btn btn-outline-info float-right"><fa-icon [icon]="faArrowAltCircleLeft"></fa-icon></button>                              
+                <button type="button" routerLink="/dashboard" class="btn btn-outline-info float-right"><fa-icon [icon]="faArrowAltCircleLeft"></fa-icon></button>
                 <form [formGroup]="dynamicForm" novalidate>
                     <div class="form-body">
                         <h3 class="header-h3">Datos Personales</h3>
@@ -10,19 +10,23 @@
                         <div formGroupName="data" class="row">
                             <div  class="form-group col-md-4">
                                 <span class="ui-float-label">
-                                    <input class="col-md-12" formControlName="nombre" id="nombre" type="text" pInputText> 
+                                    <input class="col-md-12" formControlName="nombre" id="nombre" type="text" pInputText>
                                     <label for="nombre">Nombre</label>
                                 </span>
+                                <small style="color: red;" *ngIf="(dynamicForm.controls.data.get('nombre').touched || dynamicForm.controls.data.get('nombre').dirty ) &&
+                                !dynamicForm.controls.data.get('nombre').valid">Este campo es requerido *</small>
                             </div>
                             <div  class="form-group col-md-4">
                                 <span class="ui-float-label">
-                                    <input class="col-md-12" formControlName="apellidoP" id="apellidoP" type="text" pInputText> 
+                                    <input class="col-md-12" formControlName="apellidoP" id="apellidoP" type="text" pInputText>
                                     <label for="apellidoP">Appelido Paterno</label>
                                 </span>
+                                <small style="color: red;" *ngIf="(dynamicForm.controls.data.get('apellidoP').touched || dynamicForm.controls.data.get('apellidoP').dirty ) &&
+                                !dynamicForm.controls.data.get('apellidoP').valid">Este campo es requerido *</small>
                             </div>
                             <div  class="form-group col-md-4">
                                 <span class="ui-float-label">
-                                    <input class="col-md-12" formControlName="apellidoM" id="apellidoM" type="text" pInputText> 
+                                    <input class="col-md-12" formControlName="apellidoM" id="apellidoM" type="text" pInputText>
                                     <label for="apellidoM">Apellido Materno</label>
                                 </span>
                             </div>
@@ -30,15 +34,19 @@
                         <div formGroupName="data" class="row">
                             <div  class="form-group col-md-4">
                                 <span class="ui-float-label">
-                                    <input class="col-md-12" formControlName="correo" id="correo" type="text" pInputText> 
+                                    <input class="col-md-12" formControlName="correo" id="correo" type="text" pInputText>
                                     <label for="correo">Correo</label>
                                 </span>
+                                <small style="color: red;" *ngIf="(dynamicForm.controls.data.get('correo').touched || dynamicForm.controls.data.get('correo').dirty ) &&
+                                !dynamicForm.controls.data.get('correo').valid">Correo no tiene formato valido *</small>
                             </div>
                             <div  class="form-group col-md-4">
                                 <span class="ui-float-label">
-                                    <input class="col-md-12" formControlName="telefono" id="telefono" type="text" pInputText> 
+                                    <input class="col-md-12" formControlName="telefono" id="telefono" type="text" pInputText>
                                     <label for="telefono">Telefono</label>
                                 </span>
+                                <small style="color: red;" *ngIf="(dynamicForm.controls.data.get('telefono').touched || dynamicForm.controls.data.get('telefono').dirty ) &&
+                                !dynamicForm.controls.data.get('telefono').valid">Este campo es requerido *</small>
                             </div>
                             <div  class="form-group col-md-4">
                                 <span class="ui-float-label">
@@ -52,13 +60,13 @@
                         <div formGroupName="data" class="row">
                             <div  class="form-group col-md-4">
                                 <span class="ui-float-label">
-                                    <p-dropdown [style]="{'width':'100%'}" [options]="estatus" optionLabel="nombre" datakey="id" formControlName="estatus"></p-dropdown>                                    
+                                    <p-dropdown [style]="{'width':'100%'}" [options]="estatus" optionLabel="nombre" datakey="id" formControlName="estatus"></p-dropdown>
                                     <label for="estatus">Seleccionar estatus</label>
                                 </span>
                             </div>
                             <div  class="form-group col-md-4">
                                 <span class="ui-float-label">
-                                    <input class="col-md-12" formControlName="noPasaporte" id="noPasaporte" type="text" pInputText> 
+                                    <input class="col-md-12" formControlName="noPasaporte" id="noPasaporte" type="text" pInputText>
                                     <label for="noPasaporte">No. pasaporte</label>
                                 </span>
                             </div>
@@ -72,13 +80,13 @@
                         <div formGroupName="data" class="row">
                             <div  class="form-group col-md-4">
                                 <span class="ui-float-label">
-                                    <input class="col-md-12" formControlName="ds160" id="ds160" type="text" pInputText> 
+                                    <input class="col-md-12" formControlName="ds160" id="ds160" type="text" pInputText>
                                     <label for="ds160">No. DS160</label>
                                 </span>
                             </div>
                             <div  class="form-group col-md-4">
                                 <span class="ui-float-label">
-                                    <p-dropdown [style]="{'width':'100%'}" [options]="estatusVisa" optionLabel="nombre" datakey="id" formControlName="estatusVisa"></p-dropdown>                                    
+                                    <p-dropdown [style]="{'width':'100%'}" [options]="estatusVisa" optionLabel="nombre" datakey="id" formControlName="estatusVisa"></p-dropdown>
                                     <label for="estatusVisa">Seleccionar estatus visa</label>
                                 </span>
                             </div>
@@ -99,19 +107,23 @@
                                 <div class="row col-md-12 m-0">
                                     <div  class="form-group col-md-4">
                                         <span class="ui-float-label">
-                                            <input class="col-md-12" formControlName="nombre" id="nombre" type="text" pInputText> 
+                                            <input class="col-md-12" formControlName="nombre" id="nombre" type="text" pInputText>
                                             <label for="nombre">Nombre</label>
                                         </span>
+                                        <small style="color: red;" *ngIf="(cliente.get('nombre').touched || cliente.get('nombre').dirty ) &&
+                                        !cliente.get('nombre').valid">Este campo es requerido *</small>
                                     </div>
                                     <div  class="form-group col-md-4">
                                         <span class="ui-float-label">
-                                            <input class="col-md-12" formControlName="apellidoP" id="apellidoP" type="text" pInputText> 
+                                            <input class="col-md-12" formControlName="apellidoP" id="apellidoP" type="text" pInputText>
                                             <label for="apellidoP">Appelido Paterno</label>
                                         </span>
+                                        <small style="color: red;" *ngIf="(cliente.get('apellidoP').touched || cliente.get('apellidoP').dirty ) &&
+                                        !cliente.get('apellidoP').valid">Este campo es requerido *</small>
                                     </div>
                                     <div  class="form-group col-md-4">
                                         <span class="ui-float-label">
-                                            <input class="col-md-12" formControlName="apellidoM" id="apellidoM" type="text" pInputText> 
+                                            <input class="col-md-12" formControlName="apellidoM" id="apellidoM" type="text" pInputText>
                                             <label for="apellidoM">Apellido Materno</label>
                                         </span>
                                     </div>
@@ -119,15 +131,19 @@
                                 <div class="row col-md-12 m-0">
                                     <div  class="form-group col-md-4">
                                         <span class="ui-float-label">
-                                            <input class="col-md-12" formControlName="correo" id="correo" type="text" pInputText> 
+                                            <input class="col-md-12" formControlName="correo" id="correo" type="text" pInputText>
                                             <label for="correo">Correo</label>
                                         </span>
+                                        <small style="color: red;" *ngIf="(cliente.get('correo').touched || cliente.get('correo').dirty ) &&
+                                        !cliente.get('correo').valid">Este campo es requerido *</small>
                                     </div>
                                     <div  class="form-group col-md-4">
                                         <span class="ui-float-label">
-                                            <input class="col-md-12" formControlName="telefono" id="telefono" type="text" pInputText> 
+                                            <input class="col-md-12" formControlName="telefono" id="telefono" type="text" pInputText>
                                             <label for="telefono">Telefono</label>
                                         </span>
+                                        <small style="color: red;" *ngIf="(cliente.get('telefono').touched || cliente.get('telefono').dirty ) &&
+                                        !cliente.get('telefono').valid">Este campo es requerido *</small>
                                     </div>
                                     <div  class="form-group col-md-4">
                                         <span class="ui-float-label">
@@ -141,13 +157,13 @@
                                 <div class="row col-md-12 m-0">
                                     <div  class="form-group col-md-4">
                                         <span class="ui-float-label">
-                                            <p-dropdown [style]="{'width':'100%'}" [options]="estatus" optionLabel="nombre" datakey="id" formControlName="estatus"></p-dropdown>                                    
+                                            <p-dropdown [style]="{'width':'100%'}" [options]="estatus" optionLabel="nombre" datakey="id" formControlName="estatus"></p-dropdown>
                                             <label for="estatus">Seleccionar estatus</label>
                                         </span>
                                     </div>
                                     <div  class="form-group col-md-4">
                                         <span class="ui-float-label">
-                                            <input class="col-md-12" formControlName="noPasaporte" id="noPasaporte" type="text" pInputText> 
+                                            <input class="col-md-12" formControlName="noPasaporte" id="noPasaporte" type="text" pInputText>
                                             <label for="noPasaporte">No. pasaporte</label>
                                         </span>
                                     </div>
@@ -161,13 +177,13 @@
                                 <div class="row col-md-12 m-0">
                                     <div  class="form-group col-md-4">
                                         <span class="ui-float-label">
-                                            <input class="col-md-12" formControlName="ds160" id="ds160" type="text" pInputText> 
+                                            <input class="col-md-12" formControlName="ds160" id="ds160" type="text" pInputText>
                                             <label for="ds160">No. DS160</label>
                                         </span>
                                     </div>
                                     <div  class="form-group col-md-4">
                                         <span class="ui-float-label">
-                                            <p-dropdown [style]="{'width':'100%'}" [options]="estatusVisa" optionLabel="nombre" datakey="id" formControlName="estatusVisa"></p-dropdown>                                    
+                                            <p-dropdown [style]="{'width':'100%'}" [options]="estatusVisa" optionLabel="nombre" datakey="id" formControlName="estatusVisa"></p-dropdown>
                                             <label for="estatusVisa">Seleccionar estatus visa</label>
                                         </span>
                                     </div>

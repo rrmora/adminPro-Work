@@ -18,6 +18,8 @@
                         <input class="col-md-12" formControlName="nombre" id="nombre" type="text" pInputText>
                         <label for="nombre">Nombre</label>
                     </span>
+                    <small style="color: red;" *ngIf="(formCliente.get('nombre').touched || formCliente.get('nombre').dirty ) &&
+                    !formCliente.get('nombre').valid">Este campo es requerido *</small>
                 </div>
                 <div  class="form-group col-md-4">
                     <span class="ui-float-label">
@@ -26,11 +28,11 @@
                     </span>
                 </div>
                 <div  class="form-group col-md-4">
-                    <span class="ui-float-label">
-                        <input class="col-md-12" formControlName="tipoVenta" id="tipoVenta" type="text" pInputText>
-                        <label for="tipoVenta">Tipo venta</label>
-                    </span>
-                </div>
+                  <span class="ui-float-label">
+                      <p-dropdown [style]="{'width':'100%'}" [options]="tipoVentaArr" optionLabel="nombre" datakey="id" formControlName="tipoVenta"></p-dropdown>
+                      <label for="tipoVenta">Seleccionar tipo venta</label>
+                  </span>
+              </div>
             </div>
         </div>
         <div *ngFor="let producto of p.controls; let i = index" class="list-group list-group-flush">
@@ -49,6 +51,8 @@
                                 <input class="col-md-12" formControlName="nombreProducto" id="nombreProducto" type="text" pInputText>
                                 <label for="nombreProducto">Nombre producto</label>
                             </span>
+                            <small style="color: red;" *ngIf="(producto.get('nombreProducto').touched || producto.get('nombreProducto').dirty ) &&
+                            !producto.get('nombreProducto').valid">Este campo es requerido *</small>
                         </div>
                     </div>
                     <div class="row col-md-12 m-0">
@@ -65,18 +69,24 @@
                             <input class="col-md-12" formControlName="cantidad" id="cantidad" type="number" pInputText>
                             <label for="cantidad">Cantidad</label>
                         </span>
+                        <small style="color: red;" *ngIf="(producto.get('cantidad').touched || producto.get('cantidad').dirty ) &&
+                        !producto.get('cantidad').valid">Cantidad debe ser mayor a 1 *</small>
                     </div>
                         <div  class="form-group col-md-4">
                             <span class="ui-float-label">
                                 <input class="col-md-12" formControlName="precioUnidad" id="precioUnidad" type="number" pInputText>
                                 <label for="precioUnidad">Precio</label>
                             </span>
+                            <small style="color: red;" *ngIf="(producto.get('precioUnidad').touched || producto.get('precioUnidad').dirty ) &&
+                            !producto.get('precioUnidad').valid">Precio debe ser mayor a 1 *</small>
                         </div>
                         <div  class="form-group col-md-4">
                             <span class="ui-float-label">
                                 <input class="col-md-12" formControlName="precioCliente" id="precioCliente" type="number" pInputText>
                                 <label for="precioCliente">Precio cliente</label>
                             </span>
+                            <small style="color: red;" *ngIf="(producto.get('precioCliente').touched || producto.get('precioCliente').dirty ) &&
+                            !producto.get('precioCliente').valid">Precio debe ser mayor a 1 *</small>
                         </div>
                     </div>
                 </div>
@@ -88,7 +98,7 @@
             </div>
         </div>
         <div class="row">
-          <h6 class="headerTextVianey col-lg-4">Cantidad: <strong>{{ cantidad }}</strong> </h6>
+          <h6 class="headerTextVianey col-lg-4">Cantidad de productos: <strong>{{ cantidad }}</strong> </h6>
           <h6 class="headerTextVianey col-lg-4">Total Proveedor: <strong>{{ totalSum | currency}}</strong> </h6>
           <h6 class="headerTextVianey col-lg-4">Total Cliente: <strong>{{ totalSumCliente | currency }}</strong></h6>
         </div>

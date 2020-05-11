@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ClientesService } from '../../services/clientes/clientes.service';
-import { FormBuilder, FormArray, FormGroup } from '@angular/forms';
+import { FormBuilder, FormArray, FormGroup, Validators, FormControl } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { faTrash, faPlus, faSave, faArrowAltCircleLeft } from '@fortawesome/free-solid-svg-icons';
 import * as moment from 'moment';
+import { ControlsValidationService } from '../../services/controls/controls-validation.service';
 
 
 @Component({
@@ -20,10 +21,11 @@ export class ClientesComponent implements OnInit {
   id: string;
   textBoton: string;
   faTrash = faTrash; faAdd = faPlus; faSave = faSave; faArrowAltCircleLeft = faArrowAltCircleLeft;
-  constructor(private formBuilder: FormBuilder, 
+  constructor(private formBuilder: FormBuilder,
               public clienteService: ClientesService,
               private route: ActivatedRoute,
-              private router: Router
+              private router: Router,
+              private validationControl: ControlsValidationService
               ) { }
   get f() { return this.dynamicForm.controls; }
   get c() { return this.f.children as FormArray; }
@@ -34,11 +36,11 @@ export class ClientesComponent implements OnInit {
     this.dynamicForm = this.formBuilder.group({
       _id: [''],
       data: this.formBuilder.group({
-        nombre: [''],
-        apellidoP: [''],
+        nombre: ['', Validators.required],
+        apellidoP: ['', Validators.required],
         apellidoM: [''],
-        correo: [''],
-        telefono: [''],
+        correo: ['', Validators.required],
+        telefono: ['', Validators.required],
         fechaNacimiento: [null],
         estatus: [1],
         noPasaporte: [''],
@@ -57,16 +59,16 @@ export class ClientesComponent implements OnInit {
       this.hascliente ? this.textBoton = 'Actualizar' : this.textBoton = 'Guardar'
     });
     this.hascliente ? this.clienteService.GetClientById(this.id).subscribe(result => this.asingarValores(result)) : '';
-    
+
   }
 
   agregar() {
     this.c.push(this.formBuilder.group({
-      nombre: [''],
-      apellidoP: [''],
+      nombre: ['', Validators.required],
+      apellidoP: ['', Validators.required],
       apellidoM: [''],
-      correo: [''],
-      telefono: [''],
+      correo: ['', Validators.required],
+      telefono: ['', Validators.required],
       fechaNacimiento: [null],
       estatus: [1],
       noPasaporte: [''],
@@ -103,17 +105,23 @@ export class ClientesComponent implements OnInit {
     this.c.removeAt(id);
   }
 
-  save() {    
+  save() {
     let value = this.dynamicForm.getRawValue();
     let obj = this.getObjec(value);
-    if (this.hascliente) {
-        this.clienteService.actualizarCliente(this.id, obj).subscribe(result => this.resetForm());
+    if (this.dynamicForm.valid) {
+      if (this.hascliente) {
+          this.clienteService.actualizarCliente(this.id, obj).subscribe(result => this.resetForm());
+      } else {
+          this.clienteService.crearCliente(obj).subscribe(result => this.resetForm());
+      }
     } else {
-        this.clienteService.crearCliente(obj).subscribe(result => this.resetForm());
+      this.validationControl.validateAllFormFields(this.dynamicForm);
+      if (this.dynamicForm.get('children')) {
+        this.validationControl.validateAllFormFields(this.dynamicForm.get('children') as FormGroup);
+      }
     }
-    console.log(obj);
-    }
-  
+  }
+
   asingarValores(cliente: any) {
     console.log(cliente);
     let data = cliente.cliente.data.data;
@@ -152,10 +160,10 @@ export class ClientesComponent implements OnInit {
     finalObj.data.estatusVisa = finalObj.data.estatusVisa.id ? finalObj.data.estatusVisa.id : 1;
     // finalObj.data.fechaNacimiento ? finalObj.data.fechaNacimiento = moment(finalObj.data.fechaNacimiento).format('YYYY-MM-DD HH:mm:ss') : null;
     this.hascliente ? finalObj.data.updatedAt = new Date() : finalObj.data.updatedAt = null;
-    finalObj.children = obj.children.map(x => 
-      ( { data: { nombre: x.nombre, 
-                  apellidoP: x.apellidoP, 
-                  apellidoM: x.apellidoM, 
+    finalObj.children = obj.children.map(x =>
+      ( { data: { nombre: x.nombre,
+                  apellidoP: x.apellidoP,
+                  apellidoM: x.apellidoM,
                   correo: x.correo,
                   telefono: x.telefono,
                   fechaNacimiento: x.fechaNacimiento,

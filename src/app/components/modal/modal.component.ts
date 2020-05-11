@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import {  CurrencyPipe } from '@angular/common';
 import { faPlusCircle, faTrash, faPlus, faSave, faDollarSign, faTags } from '@fortawesome/free-solid-svg-icons';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { FormGroup, FormBuilder, FormArray } from '@angular/forms';
+import { FormGroup, FormBuilder, FormArray, Validators, FormControl } from '@angular/forms';
+import { ControlsValidationService } from '../../services/controls/controls-validation.service';
 
 @Component({
   selector: 'app-modal',
@@ -16,19 +17,22 @@ export class ModalComponent implements OnInit {
   totalSum: number = 0;
   totalSumCliente: number = 0;
   myFormValueChanges$;
+  tipoVentaArr= [];
   modalTitle = 'Agregar cliente y pedido'
   constructor(private modalService: NgbModal,
               private fb: FormBuilder,
-              private currencyPipe: CurrencyPipe) { }
+              private currencyPipe: CurrencyPipe,
+              private validateControls: ControlsValidationService) { }
 
   get f() { return this.formCliente.controls; }
   get p() { return this.f.pedido as FormArray; }
 
   ngOnInit() {
+    this.setTipoVenta();
     this.formCliente = this.fb.group({
-      nombre: [''],
+      nombre: ['', Validators.required],
       apellido: [''],
-      tipoVenta: [''],
+      tipoVenta: [1],
       pedido: new FormArray([])
     });
     this.agregarPedido();
@@ -39,11 +43,11 @@ export class ModalComponent implements OnInit {
   agregarPedido() {
     this.p.push(this.fb.group({
       claveProducto: [''],
-      nombreProducto: [''],
+      nombreProducto: ['', Validators.required],
       descripcion: [''],
-      cantidad: [1],
-      precioUnidad: [''],
-      precioCliente: [''],
+      cantidad: [1, Validators.min(1)],
+      precioUnidad: ['', Validators.required],
+      precioCliente: ['', Validators.required],
       totalUnidad: [''],
       estatus: ['']
     }))
@@ -51,7 +55,15 @@ export class ModalComponent implements OnInit {
   }
 
 save () {
-
+  console.log(this.formCliente);
+  if (this.formCliente.valid) {
+      let value = this.formCliente.getRawValue();
+      value.tipoventa = value.tipoVenta ? value.tipoVenta.id : 1;
+      console.log(value);
+  } else {
+    this.validateControls.validateAllFormFields(this.formCliente);
+    this.validateControls.validateAllFormFields(this.formCliente.get('pedido') as FormGroup);
+  }
 }
   eliminar(id: number) {
     this.p.removeAt(id);
@@ -82,4 +94,10 @@ save () {
 
   }
 
+  setTipoVenta() {
+    this.tipoVentaArr = [
+      { id: 1, nombre: 'Contado' },
+      { id: 2, nombre: 'Credito' }
+    ]
+  }
 }
