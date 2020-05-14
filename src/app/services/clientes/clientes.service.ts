@@ -79,4 +79,36 @@ export class ClientesService {
     url += '?token=' + this.usuarioService.token;
     return this.http.get(url);
   }
+  /////// clientes vianey
+  GetClientsVianey(desde: number = 0) {
+    let url = URL_SERVICES + '/cliente-vianey';
+    url += '?token=' + this.usuarioService.token;
+    return this.http.get(url);
+    /*return this.http.get(url).pipe(
+      map((value: any) => {
+        value = value.clientes;
+        let data = [];
+        value.forEach(element => {
+            let aux = element.data;
+            aux.data['_id'] = element._id;
+            data.push(element.data);
+        });
+        return data;
+    })
+    );*/
+  }
+
+  crearClienteViany(cliente: any) {
+    let url = URL_SERVICES + '/cliente-vianey';
+    url += '?token=' + this.usuarioService.token;
+    return this.http.post(url, cliente).pipe(
+      map((result: any) => {
+          this.toastrService.SuccesNotification('Cliente agregado', 'Cliente agregado con exito.')
+          return result;
+        }), catchError ( error => {
+          this.toastrService.ErrorNotification(error.error.mensaje, error.error.errors.message)
+          throw 'Error ' + error;
+        })
+    );
+  }
 }

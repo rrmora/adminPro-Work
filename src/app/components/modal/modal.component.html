@@ -4,7 +4,7 @@
 <ng-template #modalContent let-modal>
   <div class="modal-header">
     <h4 class="modal-title">{{ modalTitle }}</h4>
-    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+    <button type="button" class="close" aria-label="Close" (click)="closeModal()">
       <span aria-hidden="true">&times;</span>
     </button>
   </div>
@@ -58,8 +58,8 @@
                     <div class="row col-md-12 m-0">
                         <div  class="form-group col-md-12">
                             <span class="ui-float-label">
-                                <textarea class="col-md-12" formControlName="nombreProducto" id="nombreProducto" type="text" pInputText></textarea>
-                                <label for="nombreProducto">Descripcion del producto</label>
+                                <textarea class="col-md-12" formControlName="descripcion" id="descripcion" type="text" pInputText></textarea>
+                                <label for="descripcion">Descripcion del producto</label>
                             </span>
                         </div>
                     </div>

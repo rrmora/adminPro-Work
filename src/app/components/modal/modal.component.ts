@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import {  CurrencyPipe } from '@angular/common';
 import { faPlusCircle, faTrash, faPlus, faSave, faDollarSign, faTags } from '@fortawesome/free-solid-svg-icons';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { FormGroup, FormBuilder, FormArray, Validators, FormControl } from '@angular/forms';
 import { ControlsValidationService } from '../../services/controls/controls-validation.service';
+import { ClientesService } from '../../services/clientes/clientes.service';
 
 @Component({
   selector: 'app-modal',
@@ -21,7 +21,7 @@ export class ModalComponent implements OnInit {
   modalTitle = 'Agregar cliente y pedido'
   constructor(private modalService: NgbModal,
               private fb: FormBuilder,
-              private currencyPipe: CurrencyPipe,
+              private clientes: ClientesService,
               private validateControls: ControlsValidationService) { }
 
   get f() { return this.formCliente.controls; }
@@ -46,8 +46,8 @@ export class ModalComponent implements OnInit {
       nombreProducto: ['', Validators.required],
       descripcion: [''],
       cantidad: [1, Validators.min(1)],
-      precioUnidad: ['', Validators.required],
-      precioCliente: ['', Validators.required],
+      precioUnidad: ['', [Validators.min(1), Validators.required]],
+      precioCliente: ['', [Validators.min(1), Validators.required]],
       totalUnidad: [''],
       estatus: ['']
     }))
@@ -57,9 +57,13 @@ export class ModalComponent implements OnInit {
 save () {
   console.log(this.formCliente);
   if (this.formCliente.valid) {
+      const objFinal: any = {};
       let value = this.formCliente.getRawValue();
-      value.tipoventa = value.tipoVenta ? value.tipoVenta.id : 1;
-      console.log(value);
+      let aux = value.tipoVenta.id ? value.tipoVenta.id : 1;
+      value.tipoVenta = aux;
+      objFinal.data = value;
+      console.log(objFinal);
+      this.clientes.crearClienteViany(objFinal).subscribe(res => console.log(res));
   } else {
     this.validateControls.validateAllFormFields(this.formCliente);
     this.validateControls.validateAllFormFields(this.formCliente.get('pedido') as FormGroup);
@@ -71,6 +75,11 @@ save () {
 
   openModal(modalContent) {
     this.modalService.open(modalContent, { scrollable: true, size: 'lg' });
+  }
+
+  closeModal() {
+    this.formCliente.reset();
+    this.modalService.dismissAll()
   }
 
   updateTotales(unidades: any) {

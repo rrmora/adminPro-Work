@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { faTrash, faPlus, faSave, faDollarSign, faTags } from '@fortawesome/free-solid-svg-icons';
 import { FormBuilder, FormGroup, FormArray } from '@angular/forms';
+import { ClientesService } from '../../services/clientes/clientes.service';
 
 @Component({
   selector: 'app-dashboard-clientes-vianey',
@@ -11,12 +12,13 @@ export class DashboardClientesVianeyComponent implements OnInit {
   faTrash = faTrash; faDollarSign = faDollarSign; faTags = faTags; faAdd = faPlus; faSave = faSave;
   clientes = [];
   fomCliente: FormGroup;
-  constructor(private fb: FormBuilder) { }
+  constructor(private fb: FormBuilder, private clienteService: ClientesService) { }
 
   get f() { return this.fomCliente.controls; }
   get p() { return this.f.pedido as FormArray; }
 
   ngOnInit() {
+    this.clienteService.GetClientsVianey().subscribe(res => console.log(res));
     this.clientes = [
       {id: 1, nombre: 'Juana', apellido: 'Sanchez', tipoVenta: 'Credito'}
     ];

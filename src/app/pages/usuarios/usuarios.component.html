@@ -7,7 +7,7 @@
                         <input #input (keyup)="buscarUsuario(input.value)" type="text" name="" id="" class="form-control"  placeholder="Buscar usuario">
                     </div>
                 </div>
-                <p-table [value]="usuarios" [rows]="10" [paginator]="true">
+                <p-table [value]="usuarios" [rows]="10" [paginator]="true" [responsive]="true">
                     <ng-template pTemplate="header">
                         <tr>
                             <th class="w70">Imagen</th>
@@ -30,7 +30,7 @@
                                     <option value="USER_ROLE">USER_ROLE</option>
                                 </select>
                             </td>
-                            <td style="text-align: center">                                
+                            <td style="text-align: center">
                                 <label *ngIf="usuario.google" class="label label-danger">Google</label>
                                 <label *ngIf="!usuario.google" class="label label-info">Normal</label>
                             </td>
@@ -40,7 +40,7 @@
                                 </button>
                                 <button (click)="actulizarRole(usuario)" style="margin-left: 2px;" class="btn btn-outline-success">
                                     <fa-icon [icon]="faSave"></fa-icon>
-                                </button> 
+                                </button>
                             </td>
                         </tr>
                     </ng-template>
@@ -98,7 +98,7 @@
                                     </button>
                                     <button (click)="actulizarRole(usuario)" style="margin-left: 2px;" class="btn btn-primary">
                                         <i class="fa fa-save"></i>
-                                    </button>                                
+                                    </button>
                                 </td>
                             </tr>
                         </tbody>
