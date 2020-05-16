@@ -83,8 +83,8 @@ export class ClientesService {
   GetClientsVianey(desde: number = 0) {
     let url = URL_SERVICES + '/cliente-vianey';
     url += '?token=' + this.usuarioService.token;
-    return this.http.get(url);
-    /*return this.http.get(url).pipe(
+    // return this.http.get(url);
+    return this.http.get(url).pipe(
       map((value: any) => {
         value = value.clientes;
         let data = [];
@@ -95,7 +95,7 @@ export class ClientesService {
         });
         return data;
     })
-    );*/
+    );
   }
 
   crearClienteViany(cliente: any) {

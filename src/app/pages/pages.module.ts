@@ -86,7 +86,8 @@ import { ModalComponent } from '../components/modal/modal.component';
         NgbModule,
         BrowserAnimationsModule
     ],
-    providers: [ CurrencyPipe ]
+    providers: [ CurrencyPipe ],
+    entryComponents: [ModalComponent]
 })
 
 export class PagesModule {}

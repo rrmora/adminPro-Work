@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { faTrash, faPlus, faSave, faDollarSign, faTags } from '@fortawesome/free-solid-svg-icons';
+import { faTrash, faPlus, faSave, faDollarSign, faTags, faPlusCircle } from '@fortawesome/free-solid-svg-icons';
 import { FormBuilder, FormGroup, FormArray } from '@angular/forms';
 import { ClientesService } from '../../services/clientes/clientes.service';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { ModalComponent } from '../../components/modal/modal.component';
 
 @Component({
   selector: 'app-dashboard-clientes-vianey',
@@ -9,38 +11,22 @@ import { ClientesService } from '../../services/clientes/clientes.service';
   styleUrls: ['./dashboard-clientes-vianey.component.css']
 })
 export class DashboardClientesVianeyComponent implements OnInit {
-  faTrash = faTrash; faDollarSign = faDollarSign; faTags = faTags; faAdd = faPlus; faSave = faSave;
+  faTrash = faTrash; faDollarSign = faDollarSign; faTags = faTags; faAdd = faPlus; faSave = faSave; faPlusCircle = faPlusCircle;
   clientes = [];
   fomCliente: FormGroup;
-  constructor(private fb: FormBuilder, private clienteService: ClientesService) { }
+  clienteData: any;
+  constructor(private fb: FormBuilder,
+              private clienteService: ClientesService,
+              private modalService: NgbModal) { }
 
   get f() { return this.fomCliente.controls; }
   get p() { return this.f.pedido as FormArray; }
 
   ngOnInit() {
-    this.clienteService.GetClientsVianey().subscribe(res => console.log(res));
-    this.clientes = [
-      {id: 1, nombre: 'Juana', apellido: 'Sanchez', tipoVenta: 'Credito'}
-    ];
-    this.fomCliente = this.fb.group({
-      nombre: [''],
-      apellido: [''],
-      tipoVenta: [''],
-      pedido: new FormArray([])
+    this.clienteService.GetClientsVianey().subscribe((res: any) => {
+      this.clientes = res;
+      console.log(this.clientes);
     });
-    // this.agregarPedido();
-  }
-
-  agregarPedido() {
-    this.p.push(this.fb.group({
-      claveProducto: [''],
-      nombreProducto: [''],
-      descripcion: [''],
-      precio: [0],
-      precioCliente: [0],
-      total: [0],
-      estatus: ['']
-    }))
   }
 
 save () {
@@ -55,7 +41,16 @@ save () {
   }
 
   actulizarCliente(cliente: any) {
+    console.log(cliente);
+    this.clienteData = cliente;
+    const modalRef = this.modalService.open(ModalComponent, { scrollable: true, size: 'lg' });
+    modalRef.componentInstance.data = cliente;
+    modalRef.result.then(res => console.log(res));
+  }
 
+  openModal() {
+    const modalRef = this.modalService.open(ModalComponent, { scrollable: true, size: 'lg' });
+    modalRef.componentInstance.data = null;
   }
 
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { faPlusCircle, faTrash, faPlus, faSave, faDollarSign, faTags } from '@fortawesome/free-solid-svg-icons';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { FormGroup, FormBuilder, FormArray, Validators, FormControl } from '@angular/forms';
@@ -19,6 +19,7 @@ export class ModalComponent implements OnInit {
   myFormValueChanges$;
   tipoVentaArr= [];
   modalTitle = 'Agregar cliente y pedido'
+  @Input() data: any;
   constructor(private modalService: NgbModal,
               private fb: FormBuilder,
               private clientes: ClientesService,
@@ -28,6 +29,7 @@ export class ModalComponent implements OnInit {
   get p() { return this.f.pedido as FormArray; }
 
   ngOnInit() {
+    console.log(this.data);
     this.setTipoVenta();
     this.formCliente = this.fb.group({
       nombre: ['', Validators.required],

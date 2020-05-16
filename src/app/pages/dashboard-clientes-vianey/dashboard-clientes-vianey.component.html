@@ -7,10 +7,10 @@
                   <h3 class="card-title">Clientes</h3>
                 </div>
                 <div class="col-md-6">
-                  <app-modal></app-modal>
+                  <button type="button" (click)="openModal()" class="btn btn-outline-success float-right"><fa-icon [icon]="faPlusCircle"></fa-icon> Cliente</button>
                 </div>
               </div>
-                <p-table [value]="clientes" [rows]="10" [paginator]="true">
+                <p-table [value]="clientes" [rows]="10" [paginator]="true" [responsive]="true">
                     <ng-template pTemplate="header">
                         <tr>
                             <th>Nombre</th>
@@ -21,9 +21,9 @@
                     </ng-template>
                     <ng-template pTemplate="body" let-cliente>
                         <tr>
-                            <td>{{cliente.nombre}}</td>
-                            <td>{{cliente.apellido}}</td>
-                            <td>{{cliente.tipoVenta}}</td>
+                            <td>{{cliente.data.nombre}}</td>
+                            <td>{{cliente.data.apellido}}</td>
+                            <td>{{cliente.data.tipoVenta === 1 ? 'Contado' : 'Credito'}}</td>
                             <td class="w70">
                                 <button (click)="borrarCliente(cliente)" style="margin-right: 2px;" class="btn btn-outline-danger btn-sm">
                                     <fa-icon [icon]="faTrash"></fa-icon>
