@@ -17,6 +17,7 @@ export class ClientesComponent implements OnInit {
   maxDate = new Date();
   estatus = [];
   estatusVisa = [];
+  consulado = [];
   hascliente: boolean;
   id: string;
   textBoton: string;
@@ -33,6 +34,7 @@ export class ClientesComponent implements OnInit {
   ngOnInit() {
     this.setEstatus(0);
     this.setEstatusvisa(0);
+    this.setConsulados(0);
     this.dynamicForm = this.formBuilder.group({
       _id: [''],
       data: this.formBuilder.group({
@@ -40,14 +42,21 @@ export class ClientesComponent implements OnInit {
         apellidoP: ['', Validators.required],
         apellidoM: [''],
         correo: ['', Validators.required],
+        contrasena: ['', Validators.required],
         telefono: ['', Validators.required],
         fechaNacimiento: [null],
         estatus: [1],
         noPasaporte: [''],
         fechaCitaPasaporte: [null],
+        fechaExpedicion: [null],
+        fechaVencimiento: [null],
+        ciudadExpedicion: [''],
         ds160: [''],
         estatusVisa: [1],
         fechaCitaVisa: [null],
+        fechaCAS: [null],
+        fechaConsulado: [null],
+        consulado: [0],
         createdAt: [new Date()],
         updatedAt: [null]
       }),
@@ -67,15 +76,22 @@ export class ClientesComponent implements OnInit {
       nombre: ['', Validators.required],
       apellidoP: ['', Validators.required],
       apellidoM: [''],
-      correo: ['', Validators.required],
+      correo: ['', Validators.required],      
+      contrasena: ['', Validators.required],
       telefono: ['', Validators.required],
       fechaNacimiento: [null],
       estatus: [1],
       noPasaporte: [''],
       fechaCitaPasaporte: [null],
+      fechaExpedicion: [null],
+      fechaVencimiento: [''],
+      ciudadExpedicion: [''],
       ds160: [''],
       estatusVisa: [1],
       fechaCitaVisa: [null],
+      fechaCAS: [null],
+      fechaConsulado: [null],
+      consulado: [0],
       createdAt: [new Date()],
       updatedAt: [null]
     }))
@@ -88,14 +104,21 @@ export class ClientesComponent implements OnInit {
       apellidoP: [data.apellidoP],
       apellidoM: [data.apellidoM],
       correo: [data.correo],
+      contrasena: [data.contrasena],
       telefono: [data.telefono],
       fechaNacimiento: [data.fechaNacimiento ? new Date(data.fechaNacimiento) : null],
       estatus: [this.setEstatus(data.estatus)],
       noPasaporte: [data.noPasaporte],
       fechaCitaPasaporte: [data.fechaCitaPasaporte ? new Date(data.fechaCitaPasaporte) : null],
+      fechaExpedicion: [data.fechaExpedicion ? new Date(data.fechaExpedicion) : null],
+      fechaVencimiento: [data.fechaVencimiento ? new Date(data.fechaVencimiento) : null],
+      ciudadExpedicion: [data.ciudadExpedicion],
       ds160: [data.ds160],
       estatusVisa: [this.setEstatusvisa(data.estatusVisa)],
       fechaCitaVisa: [data.fechaCitaVisa ? new Date(data.fechaCitaVisa) : null],
+      fechaCAS: [data.fechaCAS ? new Date(data.fechaCAS) : null],
+      fechaConsulado: [data.fechaConsulado ? new Date(data.fechaConsulado) : null],
+      consulado: [this.setConsulados(data.consulado)],
       createdAt: [data.createdAt],
       updatedAt: [data.updaterAt]
     }))
@@ -139,14 +162,21 @@ export class ClientesComponent implements OnInit {
     controlData.get('apellidoP').setValue(data.apellidoP);
     controlData.get('apellidoM').setValue(data.apellidoM);
     controlData.get('correo').setValue(data.correo);
+    controlData.get('contrasena').setValue(data.contrasena);
     controlData.get('telefono').setValue(data.telefono);
     controlData.get('fechaNacimiento').setValue(data.fechaNacimiento ? new Date(data.fechaNacimiento) : null);
     controlData.get('estatus').setValue(this.setEstatus(data.estatus));
     controlData.get('noPasaporte').setValue(data.noPasaporte);
     controlData.get('fechaCitaPasaporte').setValue(data.fechaCitaPasaporte ? new Date(data.fechaCitaPasaporte) : null);
+    controlData.get('fechaExpedicion').setValue(data.fechaExpedicion ? new Date(data.fechaExpedicion) : null);
+    controlData.get('fechaVencimiento').setValue(data.fechaVencimiento ? new Date(data.fechaVencimiento) : null);
+    controlData.get('ciudadExpedicion').setValue(data.ciudadExpedicion);
     controlData.get('ds160').setValue(data.ds160);
     controlData.get('estatusVisa').setValue(this.setEstatusvisa(data.estatusVisa));
     controlData.get('fechaCitaVisa').setValue(data.fechaCitaVisa ? new Date(data.fechaCitaVisa) : null);
+    controlData.get('fechaCAS').setValue(data.fechaCAS ? new Date(data.fechaCAS) : null);
+    controlData.get('fechaConsulado').setValue(data.fechaConsulado ? new Date(data.fechaConsulado) : null);
+    controlData.get('consulado').setValue(this.setConsulados(data.consulado));
     controlData.get('createdAt').setValue(data.createdAt);
     controlData.get('updatedAt').setValue(data.updatedAt);
   }
@@ -158,6 +188,7 @@ export class ClientesComponent implements OnInit {
     finalObj.data = obj.data;
     finalObj.data.estatus = finalObj.data.estatus.id ? finalObj.data.estatus.id : 1;
     finalObj.data.estatusVisa = finalObj.data.estatusVisa.id ? finalObj.data.estatusVisa.id : 1;
+    finalObj.data.consulado = finalObj.data.consulado.id ? finalObj.data.consulado.id : 0;
     // finalObj.data.fechaNacimiento ? finalObj.data.fechaNacimiento = moment(finalObj.data.fechaNacimiento).format('YYYY-MM-DD HH:mm:ss') : null;
     this.hascliente ? finalObj.data.updatedAt = new Date() : finalObj.data.updatedAt = null;
     finalObj.children = obj.children.map(x =>
@@ -165,14 +196,21 @@ export class ClientesComponent implements OnInit {
                   apellidoP: x.apellidoP,
                   apellidoM: x.apellidoM,
                   correo: x.correo,
+                  contrasena: x.contrasena,
                   telefono: x.telefono,
                   fechaNacimiento: x.fechaNacimiento,
                   estatus: x.estatus.id ? x.estatus.id : 1,
                   noPasaporte: x.noPasaporte,
                   fechaCitaPasaporte: x.fechaCitaPasaporte,
+                  fechaExpedicion: x.fechaExpedicion,
+                  fechaVencimiento: x.fechaVencimiento,
+                  ciudadExpedicion: x.ciudadExpedicion,
                   ds160: x.ds160,
                   estatusVisa: x.estatusVisa.id ? x.estatusVisa.id : 1,
                   fechaCitaVisa: x.fechaCitaVisa,
+                  fechaCAS: x.fechaCAS,
+                  fechaConsulado: x.fechaConsulado,
+                  consulado: x.consulado.id ? x.consulado.id : 0,
                   createdAt: x.createdAt ? x.createdAt : new Date(),
                   updatedAt: this.hascliente ? new Date() : null
                  },
@@ -205,6 +243,25 @@ export class ClientesComponent implements OnInit {
     ]
     if (id !== 0) {
       return this.estatusVisa.find(x => x.id === id);
+    }
+  }
+
+  setConsulados(id: number) {
+    this.consulado = [
+      { id: 0, nombre: 'Seleccionar...' },
+      { id: 1, nombre: 'Ciudad Juárez' },
+      { id: 2, nombre: 'Guadalajara' },
+      { id: 3, nombre: 'Hermosillo' },
+      { id: 4, nombre: 'Matamoros' },
+      { id: 5, nombre: 'Monterrey' },
+      { id: 6, nombre: 'Nogales' },
+      { id: 7, nombre: 'Nuevo Laredo' },
+      { id: 8, nombre: 'Tijuana' },
+    ]
+    if (id !== 0) {
+      return this.consulado.find(x => x.id === id);
+    } else {
+      return this.consulado.find(x => x.id === 0);
     }
   }
 
