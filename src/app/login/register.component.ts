@@ -41,10 +41,10 @@ export class RegisterComponent implements OnInit {
     }, {validators: this.validarCampos('password', 'password2')});
 
     this.forma.setValue({
-      nombre: 'Test1',
-      email: 'test1@tes1.com',
-      password: '1234',
-      password2: '1234',
+      nombre: '',
+      email: '',
+      password: '',
+      password2: '',
       condiciones: true
     });
   }

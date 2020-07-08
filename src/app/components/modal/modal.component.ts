@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, ViewChild } from '@angular/core';
 import { faPlusCircle, faTrash, faPlus, faSave, faDollarSign, faTags } from '@fortawesome/free-solid-svg-icons';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { FormGroup, FormBuilder, FormArray, Validators, FormControl } from '@angular/forms';
@@ -23,23 +23,27 @@ export class ModalComponent implements OnInit {
   constructor(private modalService: NgbModal,
               private fb: FormBuilder,
               private clientes: ClientesService,
-              private validateControls: ControlsValidationService) { }
+              private validateControls: ControlsValidationService,
+              private clienteService: ClientesService) { }
 
   get f() { return this.formCliente.controls; }
   get p() { return this.f.pedido as FormArray; }
 
   ngOnInit() {
-    console.log(this.data);
-    this.setTipoVenta();
+    this.setTipoVenta(1);
     this.formCliente = this.fb.group({
       nombre: ['', Validators.required],
       apellido: [''],
       tipoVenta: [1],
       pedido: new FormArray([])
     });
-    this.agregarPedido();
+    if (this.data) {
+      this.asignarValores(this.data);
+    } else {
+      this.agregarPedido();      
+    }
     this.myFormValueChanges$ = this.formCliente.controls['pedido'].valueChanges;
-    this.myFormValueChanges$.subscribe(units => this.updateTotales(units))
+    this.myFormValueChanges$.subscribe(units => this.updateTotales(units));
   }
 
   agregarPedido() {
@@ -48,7 +52,7 @@ export class ModalComponent implements OnInit {
       nombreProducto: ['', Validators.required],
       descripcion: [''],
       cantidad: [1, Validators.min(1)],
-      precioUnidad: ['', [Validators.min(1), Validators.required]],
+      precioProveedor: ['', [Validators.min(1), Validators.required]],
       precioCliente: ['', [Validators.min(1), Validators.required]],
       totalUnidad: [''],
       estatus: ['']
@@ -56,21 +60,49 @@ export class ModalComponent implements OnInit {
     // lst.map(o => o.price).reduce((a, c) => { return a + c });
   }
 
-save () {
-  console.log(this.formCliente);
-  if (this.formCliente.valid) {
-      const objFinal: any = {};
-      let value = this.formCliente.getRawValue();
-      let aux = value.tipoVenta.id ? value.tipoVenta.id : 1;
-      value.tipoVenta = aux;
-      objFinal.data = value;
-      console.log(objFinal);
-      this.clientes.crearClienteViany(objFinal).subscribe(res => console.log(res));
-  } else {
-    this.validateControls.validateAllFormFields(this.formCliente);
-    this.validateControls.validateAllFormFields(this.formCliente.get('pedido') as FormGroup);
+  asignarValores(data: any) {
+    this.formCliente.get('nombre').setValue(data.data.nombre);
+    this.formCliente.get('apellido').setValue(data.data.apellido);
+    this.formCliente.get('tipoVenta').setValue(this.setTipoVenta(data.data.tipoVenta));
+    this.asignarValoresObj(data.data.pedido);
   }
-}
+
+  asignarValoresObj(data: any) {    
+    data.forEach(e => {
+      this.p.push(this.fb.group({
+        claveProducto: [e.claveProducto],
+        nombreProducto: [e.nombreProducto],
+        descripcion: [e.descripcion],
+        cantidad: [e.cantidad],
+        precioProveedor: [e.precioProveedor],
+        precioCliente: [e.precioCliente],
+        totalUnidad: [e.totalUnidad],
+        estatus: [e.estatus]
+      }))
+    });
+    this.updateTotales(data);
+  }
+
+
+  save () {
+    console.log(this.formCliente);
+    if (this.formCliente.valid) {
+        const objFinal: any = {};
+        let value = this.formCliente.getRawValue();
+        let aux = value.tipoVenta.id ? value.tipoVenta.id : 1;
+        value.tipoVenta = aux;
+        objFinal.data = value;
+        console.log(objFinal);
+        this.clientes.crearClienteViany(objFinal).subscribe(res => {
+          this.closeModal();
+          this.clienteService.GetClientsVianey().subscribe();
+        });
+    } else {
+      this.validateControls.validateAllFormFields(this.formCliente);
+      this.validateControls.validateAllFormFields(this.formCliente.get('pedido') as FormGroup);
+    }
+  }
+
   eliminar(id: number) {
     this.p.removeAt(id);
   }
@@ -90,7 +122,7 @@ save () {
     this.totalSumCliente = 0;
     this.cantidad = 0;
     for (let i in unidades) {
-      let totalUnitPrice = (unidades[i].cantidad*unidades[i].precioUnidad);
+      let totalUnitPrice = (unidades[i].cantidad*unidades[i].precioProveedor);
       let totalUnitPriceCliente = (unidades[i].cantidad*unidades[i].precioCliente);
       let cant = unidades[i].cantidad;
       // now format total price with angular currency pipe
@@ -105,10 +137,11 @@ save () {
 
   }
 
-  setTipoVenta() {
+  setTipoVenta(id: number) {
     this.tipoVentaArr = [
       { id: 1, nombre: 'Contado' },
       { id: 2, nombre: 'Credito' }
     ]
+    return this.tipoVentaArr.find(x => x.id === id);
   }
 }

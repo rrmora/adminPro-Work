@@ -39,6 +39,7 @@ import { FiltersComponent } from '../components/filters/filters.component';
 import { HeadEstatusComponent } from '../components/head-estatus/head-estatus.component';
 import { DashboardClientesVianeyComponent } from './dashboard-clientes-vianey/dashboard-clientes-vianey.component';
 import { ModalComponent } from '../components/modal/modal.component';
+import { BlogComponent } from './inicio/blog/blog.component';
 
 
 @NgModule({
@@ -59,7 +60,8 @@ import { ModalComponent } from '../components/modal/modal.component';
         ModalUploadComponent,
         ClientesComponent,
         ModalComponent,
-        DashboardClientesVianeyComponent
+        DashboardClientesVianeyComponent,
+        BlogComponent
     ],
     exports: [
         PagesComponent,

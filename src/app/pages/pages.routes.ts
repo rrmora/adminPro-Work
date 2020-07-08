@@ -11,6 +11,9 @@ import { ProfileComponent } from './profile/profile.component';
 import { UsuariosComponent } from './usuarios/usuarios.component';
 import { ClientesComponent } from './clientes/clientes.component';
 import { DashboardClientesVianeyComponent } from './dashboard-clientes-vianey/dashboard-clientes-vianey.component';
+import { VerificarTokenGuard } from '../services/guards/verificar-token.guard';
+import { AdminGuardGuard } from '../services/guards/admin-guard.guard';
+import { BlogComponent } from './inicio/blog/blog.component';
 
 
 const pagesRoutes: Routes = [
@@ -19,17 +22,53 @@ const pagesRoutes: Routes = [
         component: PagesComponent,
         canActivate: [LoginGardGuard],
         children: [
-            { path: 'dashboard', component: DashboardComponent, data: { titulo: 'Dashboard' } },
+            {
+                path: 'dashboard', 
+                component: DashboardComponent, 
+                canActivate: [VerificarTokenGuard, AdminGuardGuard],
+                data: { titulo: 'Clientes visa' } 
+            },
             { path: 'progress', component: ProgressComponent, data: { titulo: 'Progress' } },
             { path: 'graficas', component: GraficasComponent, data: { titulo: 'Gráficas' }},
             { path: 'promesas', component: PromesasComponent, data: { titulo: 'Promesas' }},
             { path: 'rxjs', component: RxjsComponent, data: { titulo: 'RxJS' }},
-            { path: 'account-settings', component: AccountSettingComponent, data: { titulo: 'Ajustes' }},
-            { path: 'perfil', component: ProfileComponent, data: { titulo: 'Perfil de usuario' }},
-            { path: 'usuarios', component: UsuariosComponent, data: { titulo: 'Usuarios' }},
-            { path: 'clientes', component: ClientesComponent, data: { titulo: 'Clientes Visa' }},
-            { path: 'clientes/:id', component: ClientesComponent, data: { titulo: 'Clientes Visa' }},
-            { path: 'clientes-vianey', component: DashboardClientesVianeyComponent, data: { titulo: 'Clientes Vianey' }},
+            { path: 'blog', component: BlogComponent, data: { titulo: 'Blog' } },
+            {
+                path: 'account-settings', 
+                component: AccountSettingComponent,                 
+                canActivate: [VerificarTokenGuard],
+                data: { titulo: 'Ajustes' }
+            },
+            { 
+                path: 'perfil', 
+                component: ProfileComponent, 
+                canActivate: [VerificarTokenGuard],
+                data: { titulo: 'Perfil de usuario' }
+            },
+            { 
+                path: 'usuarios', 
+                component: UsuariosComponent, 
+                canActivate: [VerificarTokenGuard, AdminGuardGuard],
+                data: { titulo: 'Usuarios' }
+            },
+            { 
+                path: 'clientes', 
+                component: ClientesComponent, 
+                canActivate: [VerificarTokenGuard, AdminGuardGuard],
+                data: { titulo: 'Clientes Visa' }
+            },
+            { 
+                path: 'clientes/:id', 
+                component: ClientesComponent, 
+                canActivate: [VerificarTokenGuard, AdminGuardGuard],
+                data: { titulo: 'Clientes Visa' }
+            },
+            { 
+                path: 'clientes-vianey', 
+                component: DashboardClientesVianeyComponent,
+                canActivate: [VerificarTokenGuard, AdminGuardGuard],
+                data: { titulo: 'Clientes Vianey' }            
+            },
             { path: '', redirectTo: '/dashboard', pathMatch: 'full'}
         ]
     }

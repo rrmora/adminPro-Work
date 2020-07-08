@@ -7,12 +7,21 @@ export class SidebarService {
 
   menu: any = [
     {
+      titulo: 'Inicio',
+      icono: 'mdi mdi-account-card-details',
+      submenu: [
+        { titulo: 'Blog', url: '/blog' },
+        // { titulo: 'Clientes', url: '/clientes' },
+        // { titulo: 'Médicos', url: '/medicos' },
+      ]
+    },
+    {
       titulo: 'Principal',
       icono: 'mdi mdi-gauge',
       submenu: [
-        { titulo: 'Dashboard', url: '/dashboard' },
-        { titulo: 'Clientes Visa', url: '/clientes' },
-        { titulo: 'Clientes Vianey', url: '/clientes-vianey' },
+        { titulo: 'Inicio Clientes Visa', url: '/dashboard' },
+        { titulo: 'Agregar Clientes Visa', url: '/clientes' },
+        // { titulo: 'Inicio Clientes Vianey', url: '/clientes-vianey' },
         { titulo: 'Gráficas', url: '/graficas' },
         // { titulo: 'Promesas', url: '/promesas' },
         // { titulo: 'RxJs', url: '/rxjs' }

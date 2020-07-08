@@ -13,8 +13,8 @@
                             <th>Nombre</th>
                             <th class="priority-2">Apellido Paterno</th>
                             <th class="priority-2">Telefono</th>
-                            <th class="priority-2">Fecha Pasaporte</th>
-                            <th class="priority-2">Fecha Visa</th>
+                            <th class="priority-2">Total</th>
+                            <th class="priority-2">Importe</th>
                             <th class="priority-2">Fecha Tramite</th>
                             <th>Estatus</th>
                             <th>Acciones</th>
@@ -28,22 +28,21 @@
                                 <span class="visibility-sm">
                                     / {{rowData.apellidoP}} 
                                     / {{rowData.telefono}} 
-                                    / {{rowData.fechaCitaPasaporte | date: 'short'}}
-                                    / {{rowData.fechaCitaVisa | date: 'short'}}
+                                    / {{rowData.total | currency}}
+                                    / {{rowData.importeRecibido | currency}}
                                     - {{rowData.createdAt | date: 'short'}}
                                 </span>
                             </td>
                             <td class="priority-2">{{rowData.apellidoP}}</td>
                             <td class="priority-2">{{rowData.telefono}}</td>
-                            <td class="priority-2">{{rowData.fechaCitaPasaporte | date: 'short'}}</td>
-                            <td class="priority-2">{{rowData.fechaCitaVisa | date: 'short'}}</td>
+                            <td class="priority-2 text-right">{{rowData.total | currency}}</td>
+                            <td class="priority-2 text-right">{{rowData.importeRecibido | currency}}</td>
                             <td class="priority-2">{{rowData.createdAt | date: 'short'}}</td>
                             <td class="text-center">
                                 <span class="badge m-1" [ngStyle]="{'background-color': setEstatus(rowData.estatus).color}">{{setEstatus(rowData.estatus).key }}</span>
                                 <span class="badge m-1" [ngStyle]="{'background-color': setEstatusvisa(rowData.estatusVisa).color}">{{setEstatusvisa(rowData.estatusVisa).key }}</span>
-                                <span class="badge badge-primary m-1">{{setEstatus(rowData.estatus).key }}</span>
                             </td>
-                            <td class="text-center" (click)="editar(rowNode)"><fa-icon [icon]="faEdit"></fa-icon></td>
+                            <td class="text-center"><fa-icon (click)="editar(rowNode)" style="cursor: pointer;" [icon]="faEdit"></fa-icon></td>
                         </tr>            
                     </ng-template>
                   </p-treeTable>

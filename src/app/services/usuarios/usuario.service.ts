@@ -23,6 +23,20 @@ token: string;
     this.inicializarDeStorage();
    }
 
+   renovarToken(){
+    let url = URL_SERVICES + '/login/refreshtoken';
+    url += '?token=' + this.token;
+    return this.http.get(url).pipe(map((resp: any) => {
+      this.token = resp.token;
+      localStorage.setItem('token', this.token);
+      return true;
+    }), catchError ( error => {
+      this.router.navigate(['/login']);
+      this.toastrService.ErrorNotification('No se pudo renovar TOKEN', 'No fue posible renovar token')
+      throw 'Error ' + error;
+    }))
+   }
+
    isLogged() {
     return (this.token.length > 5) ? true : false;
    }

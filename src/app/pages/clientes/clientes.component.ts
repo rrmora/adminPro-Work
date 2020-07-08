@@ -21,6 +21,7 @@ export class ClientesComponent implements OnInit {
   hascliente: boolean;
   id: string;
   textBoton: string;
+  total: number = 1;
   faTrash = faTrash; faAdd = faPlus; faSave = faSave; faArrowAltCircleLeft = faArrowAltCircleLeft;
   constructor(private formBuilder: FormBuilder,
               public clienteService: ClientesService,
@@ -30,6 +31,8 @@ export class ClientesComponent implements OnInit {
               ) { }
   get f() { return this.dynamicForm.controls; }
   get c() { return this.f.children as FormArray; }
+  get tt() { return this.dynamicForm ? this.total = this.c.controls.length + 1 : this.total = 1  }
+  get ttl() { return this.total = this.total - 1 }
 
   ngOnInit() {
     this.setEstatus(0);
@@ -57,6 +60,8 @@ export class ClientesComponent implements OnInit {
         fechaCAS: [null],
         fechaConsulado: [null],
         consulado: [0],
+        total: [0],
+        importeRecibido: [0],
         createdAt: [new Date()],
         updatedAt: [null]
       }),
@@ -95,6 +100,7 @@ export class ClientesComponent implements OnInit {
       createdAt: [new Date()],
       updatedAt: [null]
     }))
+    this.tt;
   }
 
   agregarcliente(data: any, id: string) {
@@ -122,10 +128,12 @@ export class ClientesComponent implements OnInit {
       createdAt: [data.createdAt],
       updatedAt: [data.updaterAt]
     }))
+    this.tt;
   }
 
   eliminar(id: number) {
     this.c.removeAt(id);
+    this.ttl;
   }
 
   save() {
@@ -177,6 +185,8 @@ export class ClientesComponent implements OnInit {
     controlData.get('fechaCAS').setValue(data.fechaCAS ? new Date(data.fechaCAS) : null);
     controlData.get('fechaConsulado').setValue(data.fechaConsulado ? new Date(data.fechaConsulado) : null);
     controlData.get('consulado').setValue(this.setConsulados(data.consulado));
+    controlData.get('total').setValue(data.total);
+    controlData.get('importeRecibido').setValue(data.importeRecibido);
     controlData.get('createdAt').setValue(data.createdAt);
     controlData.get('updatedAt').setValue(data.updatedAt);
   }

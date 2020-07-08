@@ -23,15 +23,19 @@ export class DashboardClientesVianeyComponent implements OnInit {
   get p() { return this.f.pedido as FormArray; }
 
   ngOnInit() {
+    this.getClientes();
+  }
+
+  getClientes() {
     this.clienteService.GetClientsVianey().subscribe((res: any) => {
       this.clientes = res;
-      console.log(this.clientes);
     });
   }
 
-save () {
+  save () {
 
-}
+  }
+  
   eliminar(id: number) {
     this.p.removeAt(id);
   }
@@ -51,6 +55,7 @@ save () {
   openModal() {
     const modalRef = this.modalService.open(ModalComponent, { scrollable: true, size: 'lg' });
     modalRef.componentInstance.data = null;
+    modalRef.result.then(res => console.log(res));
   }
 
 }
