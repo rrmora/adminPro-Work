@@ -40,6 +40,7 @@ import { HeadEstatusComponent } from '../components/head-estatus/head-estatus.co
 import { DashboardClientesVianeyComponent } from './dashboard-clientes-vianey/dashboard-clientes-vianey.component';
 import { ModalComponent } from '../components/modal/modal.component';
 import { BlogComponent } from './inicio/blog/blog.component';
+import { ConfiguracionComponent } from './configuracion/configuracion.component';
 
 
 @NgModule({
@@ -61,7 +62,8 @@ import { BlogComponent } from './inicio/blog/blog.component';
         ClientesComponent,
         ModalComponent,
         DashboardClientesVianeyComponent,
-        BlogComponent
+        BlogComponent,
+        ConfiguracionComponent
     ],
     exports: [
         PagesComponent,

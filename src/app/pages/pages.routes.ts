@@ -14,6 +14,7 @@ import { DashboardClientesVianeyComponent } from './dashboard-clientes-vianey/da
 import { VerificarTokenGuard } from '../services/guards/verificar-token.guard';
 import { AdminGuardGuard } from '../services/guards/admin-guard.guard';
 import { BlogComponent } from './inicio/blog/blog.component';
+import { ConfiguracionComponent } from './configuracion/configuracion.component';
 
 
 const pagesRoutes: Routes = [
@@ -68,6 +69,12 @@ const pagesRoutes: Routes = [
                 component: DashboardClientesVianeyComponent,
                 canActivate: [VerificarTokenGuard, AdminGuardGuard],
                 data: { titulo: 'Clientes Vianey' }            
+            },
+            {
+                path: 'configuracion',
+                component: ConfiguracionComponent,
+                canActivate: [VerificarTokenGuard, AdminGuardGuard],
+                data: { titulo: 'Configuracion' }
             },
             { path: '', redirectTo: '/dashboard', pathMatch: 'full'}
         ]

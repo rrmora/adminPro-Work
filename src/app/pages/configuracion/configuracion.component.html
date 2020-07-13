@@ -1,0 +1,170 @@
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-body">
+                <div class="row m-2">
+                    <div class="col-lg-6">
+                        <h4 class="header-h3">Estatus principal</h4>
+                        <div [formGroup]="formEstatusGeneral" class="row m-0 p-0">
+                            <div class="col-lg-9" style="margin-top: 12px;">
+                                <div class="form-group col-md-12">
+                                    <span class="ui-float-label">
+                                        <input class="col-md-12" formControlName="nombre" id="nombre1" type="text" pInputText>
+                                        <label for="nombre">Nombre</label>
+                                    </span>
+                                    <small style="color: red;" *ngIf="(formEstatusGeneral.get('nombre').touched || formEstatusGeneral.get('nombre').dirty ) &&
+                                    !formEstatusGeneral.get('nombre').valid">Este campo es requerido *</small>
+                                </div>
+                            </div>
+                            <div class="col-lg-3" style="margin-top: 12px;">
+                                <button type="button" (click)="agregarActualizarEG(formEstatusGeneral.value)" class="btn btn-outline-info float-left"><fa-icon [icon]="faSave"></fa-icon></button>
+                            </div>
+                        </div>
+                        <p-table [value]="estatusGeneral" [rows]="5" [paginator]="true" [responsive]="true">
+                            <ng-template pTemplate="header">
+                                <tr>
+                                    <th>Nombre</th>
+                                    <th class="w170">Acciones</th>
+                                </tr>
+                            </ng-template>
+                            <ng-template pTemplate="body" let-usuario>
+                                <tr>
+                                    <td>{{usuario.nombre}}</td>
+                                    <td class="w170">
+                                        <button (click)="editarEstatusGeneral(usuario)" style="margin-right: 2px;" class="btn btn-outline-success">
+                                            <fa-icon [icon]="faEdit"></fa-icon>
+                                        </button>
+                                        <button (click)="borrarEstatusGeneral(usuario)" style="margin-left: 2px;" class="btn btn-outline-danger">
+                                            <fa-icon [icon]="faTrash"></fa-icon>
+                                        </button>
+                                    </td>
+                                </tr>
+                            </ng-template>
+                        </p-table>
+                    </div>                    
+                    <div class="col-lg-6">
+                        <h4 class="header-h3">Estatus visa</h4>
+                        <div class="row m-0 p-0">
+                            <div class="col-lg-9" style="margin-top: 12px;">
+                                <div [formGroup]="formEstatusVisa" class="form-group col-md-12">
+                                    <span class="ui-float-label">
+                                        <input class="col-md-12" formControlName="nombre" id="nombre2" type="text" pInputText>
+                                        <label for="nombre">Nombre</label>
+                                    </span>
+                                    <small style="color: red;" *ngIf="(formEstatusVisa.get('nombre').touched || formEstatusVisa.get('nombre').dirty ) &&
+                                    !formEstatusVisa.get('nombre').valid">Este campo es requerido *</small>
+                                </div>
+                            </div>
+                            <div class="col-lg-3" style="margin-top: 12px;">
+                                <button type="button" (click)="agregarActualizarEV(formEstatusVisa.value)" class="btn btn-outline-info float-left"><fa-icon [icon]="faSave"></fa-icon></button>
+                            </div>
+                        </div>
+                        <p-table [value]="estatusVisa" [rows]="5" [paginator]="true" [responsive]="true">
+                            <ng-template pTemplate="header">
+                                <tr>
+                                    <th>Nombre</th>
+                                    <th class="w170">Acciones</th>
+                                </tr>
+                            </ng-template>
+                            <ng-template pTemplate="body" let-usuario>
+                                <tr>
+                                    <td>{{usuario.nombre}}</td>
+                                    <td class="w170">
+                                        <button (click)="editarEstatusVisa(usuario)"  style="margin-right: 2px;" class="btn btn-outline-success">
+                                            <fa-icon [icon]="faEdit"></fa-icon>
+                                        </button>
+                                        <button (click)="borrarEstatusVisa(usuario)" style="margin-left: 2px;" class="btn btn-outline-danger">
+                                            <fa-icon [icon]="faTrash"></fa-icon>
+                                        </button>
+                                    </td>
+                                </tr>
+                            </ng-template>
+                        </p-table>
+                    </div>
+                </div>
+                <br>
+                <div class="row m-2">
+                    <div class="col-lg-6">
+                        <h4 class="header-h3">Consulados</h4>
+                        <div class="row m-0 p-0">
+                            <div class="col-lg-9" style="margin-top: 12px;">
+                                <div [formGroup]="formConsulados" class="form-group col-md-12">
+                                    <span class="ui-float-label">
+                                        <input class="col-md-12" formControlName="nombre" id="nombre3" type="text" pInputText>
+                                        <label for="nombre">Nombre</label>
+                                    </span>
+                                    <small style="color: red;" *ngIf="(formConsulados.get('nombre').touched || formConsulados.get('nombre').dirty ) &&
+                                    !formConsulados.get('nombre').valid">Este campo es requerido *</small>
+                                </div>
+                            </div>
+                            <div class="col-lg-3" style="margin-top: 12px;">
+                                <button type="button" (click)="agregarActualizarconsulados(formConsulados.value)" class="btn btn-outline-info float-left"><fa-icon [icon]="faSave"></fa-icon></button>
+                            </div>
+                        </div>
+                        <p-table [value]="consulados" [rows]="5" [paginator]="true" [responsive]="true">
+                            <ng-template pTemplate="header">
+                                <tr>
+                                    <th>Nombre</th>
+                                    <th class="w170">Acciones</th>
+                                </tr>
+                            </ng-template>
+                            <ng-template pTemplate="body" let-usuario>
+                                <tr>
+                                    <td>{{usuario.nombre}}</td>
+                                    <td class="w170">
+                                        <button (click)="editarConsuldado(usuario)" style="margin-right: 2px;" class="btn btn-outline-success">
+                                            <fa-icon [icon]="faEdit"></fa-icon>
+                                        </button>
+                                        <button (click)="borrarConsulado(usuario)" style="margin-left: 2px;" class="btn btn-outline-danger">
+                                            <fa-icon [icon]="faTrash"></fa-icon>
+                                        </button>
+                                    </td>
+                                </tr>
+                            </ng-template>
+                        </p-table>
+                    </div>
+                    
+                    <div class="col-lg-6">
+                        <h4 class="header-h3">Precio tramite</h4>
+                        <div class="row m-0 p-0">
+                            <div class="col-lg-9" style="margin-top: 12px;">
+                                <div [formGroup]="formPrecio" class="form-group col-md-12">
+                                    <span class="ui-float-label">
+                                        <input class="col-md-12" formControlName="nombre" id="nombre4" type="text" pInputText>
+                                        <label for="nombre">Precio</label>
+                                    </span>
+                                    <small style="color: red;" *ngIf="(formPrecio.get('nombre').touched || formPrecio.get('nombre').dirty ) &&
+                                    !formPrecio.get('nombre').valid">Este campo es requerido *</small>
+                                </div>
+                            </div>
+                            <div class="col-lg-3" style="margin-top: 12px;">
+                                <button type="button" (click)="agregarActualizarPrecio(this.formPrecio.value)" class="btn btn-outline-info float-left"><fa-icon [icon]="faSave"></fa-icon></button>
+                            </div>
+                        </div>
+                        <p-table [value]="precio" [rows]="5" [paginator]="true" [responsive]="true">
+                            <ng-template pTemplate="header">
+                                <tr>
+                                    <th>Precio</th>
+                                    <th class="w170">Acciones</th>
+                                </tr>
+                            </ng-template>
+                            <ng-template pTemplate="body" let-usuario>
+                                <tr>
+                                    <td>{{usuario.nombre | currency}}</td>
+                                    <td class="w170">
+                                        <button (click)="editarPrecio(usuario)" style="margin-left: 2px;" class="btn btn-outline-success">
+                                            <fa-icon [icon]="faEdit"></fa-icon>
+                                        </button>
+                                       <!--  <button  style="margin-right: 2px;" class="btn btn-outline-danger">
+                                            <fa-icon [icon]="faTrash"></fa-icon>
+                                        </button> -->
+                                    </td>
+                                </tr>
+                            </ng-template>
+                        </p-table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

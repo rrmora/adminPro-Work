@@ -32,6 +32,7 @@ export class SidebarService {
       icono: 'mdi mdi-folder-lock-open',
       submenu: [
         { titulo: 'Usuarios', url: '/usuarios' },
+        { titulo: 'Configuracion', url: '/configuracion'}
         // { titulo: 'Clientes', url: '/clientes' },
         // { titulo: 'Médicos', url: '/medicos' },
       ]
