@@ -5,8 +5,9 @@
     <div class="login-box card">
         <div class="card-body">
             <form ngNativeValidate #f="ngForm" class="form-horizontal form-material" (ngSubmit)="ingresar(f)">
-                <a class="text-center db"><img src="../assets/images/logo-icon.png" alt="Home" /><br/><img src="../assets/images/logo-text.png" alt="Home" /></a>
-                <div class="form-group m-t-40">
+                <!-- <a class="text-center db"><img src="../assets/images/logo-icon.png" alt="Home" /><br/><img src="../assets/images/logo-text.png" alt="Home" /></a> -->
+                <a class="text-center db" style="height: 180px;"><img src="../assets/images/favicon.png" alt="Home"  width="170px"/></a>
+                <div class="form-group">
                     <div class="col-xs-12">
                         <input [ngModel]="email" name="email" class="form-control" type="email" required placeholder="Correo">
                     </div>
