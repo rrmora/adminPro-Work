@@ -28,11 +28,15 @@ export class ConfiguracionComponent implements OnInit {
   ngOnInit() {
     this.formEstatusGeneral = this.formBuilder.group({
       _id: [''],
-      nombre: ['', Validators.required]
+      nombre: ['', Validators.required],
+      abre: ['', Validators.required],
+      color: ['']
     });
     this.formEstatusVisa = this.formBuilder.group({
       _id: [''],
-      nombre: ['', Validators.required]
+      nombre: ['', Validators.required],
+      abre: ['', Validators.required],
+      color: ['']
     });
     this.formConsulados = this.formBuilder.group({
       _id: [''],
@@ -67,7 +71,7 @@ export class ConfiguracionComponent implements OnInit {
   }
 
   editarEstatusGeneral(estatus: any) {
-    this.formEstatusGeneral.setValue({_id: estatus._id, nombre: estatus.nombre });
+    this.formEstatusGeneral.setValue({_id: estatus._id, nombre: estatus.nombre, abre: estatus.abre, color: estatus.color });
   }
 
   actualizarEG(estatus: any) {
@@ -76,8 +80,8 @@ export class ConfiguracionComponent implements OnInit {
 
   getEstatusGeneral() {
     this.configuracionService.obtenerEstatusGeneral().subscribe((res: any) => { 
-      this.estatusGeneral = res.estatusGeneral}
-    );
+      this.estatusGeneral = res.estatusGeneral
+    });
   }
 
   borrarEstatusGeneral(estatus: any) {
@@ -107,7 +111,7 @@ export class ConfiguracionComponent implements OnInit {
   }
 
   editarEstatusVisa(estatus: any) {
-    this.formEstatusVisa.setValue({ _id: estatus._id, nombre: estatus.nombre} );
+    this.formEstatusVisa.setValue({ _id: estatus._id, nombre: estatus.nombre,  abre: estatus.abre, color: estatus.color } );
   }
 
   actualizarEV(estatus: any) {

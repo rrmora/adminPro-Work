@@ -1,4 +1,17 @@
 .w170 {
-    width: 170px; 
+    width: 120px; 
     text-align: center;
+}
+
+.w40 {
+    width: 25px;
+    height: 25px;
+}
+
+.w50 {
+    width: 70px;
+}
+
+.w150 {
+    width: 90px;
 }

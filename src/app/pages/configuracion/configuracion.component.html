@@ -6,8 +6,8 @@
                     <div class="col-lg-6">
                         <h4 class="header-h3">Estatus principal</h4>
                         <div [formGroup]="formEstatusGeneral" class="row m-0 p-0">
-                            <div class="col-lg-9" style="margin-top: 12px;">
-                                <div class="form-group col-md-12">
+                            <div class="col-lg-5" style="margin-top: 12px;">
+                                <div class="form-group ">
                                     <span class="ui-float-label">
                                         <input class="col-md-12" formControlName="nombre" id="nombre1" type="text" pInputText>
                                         <label for="nombre">Nombre</label>
@@ -16,20 +16,37 @@
                                     !formEstatusGeneral.get('nombre').valid">Este campo es requerido *</small>
                                 </div>
                             </div>
-                            <div class="col-lg-3" style="margin-top: 12px;">
-                                <button type="button" (click)="agregarActualizarEG(formEstatusGeneral.value)" class="btn btn-outline-info float-left"><fa-icon [icon]="faSave"></fa-icon></button>
+                            <div class="col-lg-4" style="margin-top: 12px;">
+                                <div class="form-group ">
+                                    <span class="ui-float-label">
+                                        <input class="col-md-12" formControlName="abre" id="abre1" type="text" pInputText>
+                                        <label for="abre">Clave</label>
+                                    </span>
+                                    <small style="color: red;" *ngIf="(formEstatusGeneral.get('abre').touched || formEstatusGeneral.get('abre').dirty ) &&
+                                    !formEstatusGeneral.get('abre').valid">Este campo es requerido *</small>
+                                </div>
+                            </div>
+                            <div class="col-lg-1" style="margin-top: 12px;">
+                                    <p-colorPicker id="color"  formControlName="color"></p-colorPicker>
+                            </div>
+                            <div class="col-lg-2" style="margin-top: 12px;">
+                                <button type="button" (click)="agregarActualizarEG(formEstatusGeneral.value)" class="btn btn-outline-info float-rigth"><fa-icon [icon]="faSave"></fa-icon></button>
                             </div>
                         </div>
                         <p-table [value]="estatusGeneral" [rows]="5" [paginator]="true" [responsive]="true">
                             <ng-template pTemplate="header">
                                 <tr>
                                     <th>Nombre</th>
+                                    <th class="w150">Clave</th>
+                                    <th class="w50">Color</th>
                                     <th class="w170">Acciones</th>
                                 </tr>
                             </ng-template>
                             <ng-template pTemplate="body" let-usuario>
                                 <tr>
                                     <td>{{usuario.nombre}}</td>
+                                    <td class="w150">{{usuario.abre}}</td>
+                                    <td class="w50"><div class="w40" [ngStyle]="{'background-color': usuario.color}"></div></td>
                                     <td class="w170">
                                         <button (click)="editarEstatusGeneral(usuario)" style="margin-right: 2px;" class="btn btn-outline-success">
                                             <fa-icon [icon]="faEdit"></fa-icon>
@@ -44,9 +61,9 @@
                     </div>                    
                     <div class="col-lg-6">
                         <h4 class="header-h3">Estatus visa</h4>
-                        <div class="row m-0 p-0">
-                            <div class="col-lg-9" style="margin-top: 12px;">
-                                <div [formGroup]="formEstatusVisa" class="form-group col-md-12">
+                        <div [formGroup]="formEstatusVisa" class="row m-0 p-0">
+                            <div class="col-lg-5" style="margin-top: 12px;">
+                                <div class="form-group col-md-12">
                                     <span class="ui-float-label">
                                         <input class="col-md-12" formControlName="nombre" id="nombre2" type="text" pInputText>
                                         <label for="nombre">Nombre</label>
@@ -55,7 +72,20 @@
                                     !formEstatusVisa.get('nombre').valid">Este campo es requerido *</small>
                                 </div>
                             </div>
-                            <div class="col-lg-3" style="margin-top: 12px;">
+                            <div class="col-lg-4" style="margin-top: 12px;">
+                                <div class="form-group ">
+                                    <span class="ui-float-label">
+                                        <input class="col-md-12" formControlName="abre" id="abre2" type="text" pInputText>
+                                        <label for="abre">Clave</label>
+                                    </span>
+                                    <small style="color: red;" *ngIf="(formEstatusVisa.get('abre').touched || formEstatusVisa.get('abre').dirty ) &&
+                                    !formEstatusVisa.get('abre').valid">Este campo es requerido *</small>
+                                </div>
+                            </div>
+                            <div class="col-lg-1" style="margin-top: 12px;">
+                                    <p-colorPicker id="color"  formControlName="color"></p-colorPicker>
+                            </div>
+                            <div class="col-lg-2" style="margin-top: 12px;">
                                 <button type="button" (click)="agregarActualizarEV(formEstatusVisa.value)" class="btn btn-outline-info float-left"><fa-icon [icon]="faSave"></fa-icon></button>
                             </div>
                         </div>
@@ -63,12 +93,16 @@
                             <ng-template pTemplate="header">
                                 <tr>
                                     <th>Nombre</th>
+                                    <th class="w150">Clave</th>
+                                    <th class="w50">Color</th>
                                     <th class="w170">Acciones</th>
                                 </tr>
                             </ng-template>
                             <ng-template pTemplate="body" let-usuario>
                                 <tr>
                                     <td>{{usuario.nombre}}</td>
+                                    <td class="w150">{{usuario.abre}}</td>
+                                    <td class="w50"><div class="w40" [ngStyle]="{'background-color': usuario.color}"></div></td>
                                     <td class="w170">
                                         <button (click)="editarEstatusVisa(usuario)"  style="margin-right: 2px;" class="btn btn-outline-success">
                                             <fa-icon [icon]="faEdit"></fa-icon>

@@ -32,7 +32,7 @@
                             </div>
                             <div  class="form-group col-md-3">
                                 <span class="ui-float-label">
-                                    <p-dropdown [style]="{'width':'100%'}" [options]="estatus" optionLabel="nombre" datakey="id" formControlName="estatus"></p-dropdown>
+                                    <p-dropdown [style]="{'width':'100%'}" [options]="estatusGeneral" optionLabel="nombre" datakey="_id" formControlName="estatus"></p-dropdown>
                                     <label for="estatus">Seleccionar estatus</label>
                                 </span>
                             </div>
@@ -62,7 +62,8 @@
                             </div>
                             <div  class="form-group col-md-3">
                                 <span class="ui-float-label">
-                                    <input class="col-md-12" formControlName="telefono" id="telefono" type="text" pInputText>
+                                    <!-- <input class="col-md-12" formControlName="telefono" id="telefono" type="text" pInputText> -->
+                                    <p-inputMask [style]="{'width':'100%'}" formControlName="telefono" id="telefono" mask="999-999-9999"></p-inputMask>
                                     <label for="telefono">Telefono</label>
                                 </span>
                                 <small style="color: red;" *ngIf="(dynamicForm.controls.data.get('telefono').touched || dynamicForm.controls.data.get('telefono').dirty ) &&
@@ -73,7 +74,8 @@
                         <div formGroupName="data" class="row">
                             <div  class="form-group col-md-3">
                                 <span class="ui-float-label">
-                                    <input class="col-md-12" formControlName="noPasaporte" id="noPasaporte" type="text" pInputText>
+                                    <!-- <input class="col-md-12" formControlName="noPasaporte" id="noPasaporte" type="text" pInputText> -->
+                                    <p-inputMask [style]="{'width':'100%'}" formControlName="noPasaporte" id="noPasaporte" mask="999999999"></p-inputMask>
                                     <label for="noPasaporte">No. pasaporte</label>
                                 </span>
                             </div>
@@ -100,13 +102,14 @@
                         <div formGroupName="data" class="row">
                             <div  class="form-group col-md-3">
                                 <span class="ui-float-label">
-                                    <input class="col-md-12" formControlName="ds160" id="ds160" type="text" pInputText>
+                                    <!-- <input class="col-md-12" formControlName="ds160" id="ds160" type="text" pInputText> -->
+                                    <p-inputMask [style]="{'width':'100%'}" formControlName="ds160" id="ds160" mask="9999999999"></p-inputMask>
                                     <label for="ds160">No. DS160</label>
                                 </span>
                             </div>
                             <div  class="form-group col-md-3">
                                 <span class="ui-float-label">
-                                    <p-dropdown [style]="{'width':'100%'}" [options]="estatusVisa" optionLabel="nombre" datakey="id" formControlName="estatusVisa"></p-dropdown>
+                                    <p-dropdown [style]="{'width':'100%'}" [options]="estatusVisa" optionLabel="nombre" datakey="_id" formControlName="estatusVisa"></p-dropdown>
                                     <label for="estatusVisa">Seleccionar estatus visa</label>
                                 </span>
                             </div>
@@ -126,7 +129,7 @@
                         <div formGroupName="data" class="row">
                             <div  class="form-group col-md-3">
                                 <span class="ui-float-label">
-                                    <p-dropdown [style]="{'width':'100%'}" [options]="consulado" optionLabel="nombre" datakey="id" formControlName="consulado"></p-dropdown>
+                                    <p-dropdown [style]="{'width':'100%'}" [options]="consulado" optionLabel="nombre" datakey="_id" formControlName="consulado"></p-dropdown>
                                     <label for="consulado">Seleccionar consulado</label>
                                 </span>
                             </div>
@@ -166,7 +169,7 @@
                                     </div>                                    
                                     <div  class="form-group col-md-3">
                                         <span class="ui-float-label">
-                                            <p-dropdown [style]="{'width':'100%'}" [options]="estatus" optionLabel="nombre" datakey="id" formControlName="estatus"></p-dropdown>
+                                            <p-dropdown [style]="{'width':'100%'}" [options]="estatusGeneral" optionLabel="nombre" datakey="_id" formControlName="estatus"></p-dropdown>
                                             <label for="estatus">Seleccionar estatus</label>
                                         </span>
                                     </div>
@@ -196,7 +199,8 @@
                                     </div>
                                     <div  class="form-group col-md-3">
                                         <span class="ui-float-label">
-                                            <input class="col-md-12" formControlName="telefono" id="telefono" type="text" pInputText>
+                                            <!-- <input class="col-md-12" formControlName="telefono" id="telefono" type="text" pInputText> -->
+                                            <p-inputMask [style]="{'width':'100%'}" formControlName="telefono" id="telefono" mask="999-999-9999"></p-inputMask>
                                             <label for="telefono">Telefono</label>
                                         </span>
                                         <small style="color: red;" *ngIf="(cliente.get('telefono').touched || cliente.get('telefono').dirty ) &&
@@ -208,7 +212,8 @@
                                 <div class="row col-md-12 m-0">
                                     <div  class="form-group col-md-3">
                                         <span class="ui-float-label">
-                                            <input class="col-md-12" formControlName="noPasaporte" id="noPasaporte" type="text" pInputText>
+                                            <!-- <input class="col-md-12" formControlName="noPasaporte" id="noPasaporte" type="text" pInputText> -->
+                                            <p-inputMask [style]="{'width':'100%'}" formControlName="noPasaporte" id="noPasaporte" mask="999999999"></p-inputMask>
                                             <label for="noPasaporte">No. pasaporte</label>
                                         </span>
                                     </div>
@@ -236,13 +241,14 @@
                                 <div class="row col-md-12 m-0">
                                     <div  class="form-group col-md-3">
                                         <span class="ui-float-label">
-                                            <input class="col-md-12" formControlName="ds160" id="ds160" type="text" pInputText>
+                                            <!-- <input class="col-md-12" formControlName="ds160" id="ds160" type="text" pInputText> -->
+                                            <p-inputMask [style]="{'width':'100%'}" formControlName="ds160" id="ds160" mask="9999999999"></p-inputMask>
                                             <label for="ds160">No. DS160</label>
                                         </span>
                                     </div>
                                     <div  class="form-group col-md-3">
                                         <span class="ui-float-label">
-                                            <p-dropdown [style]="{'width':'100%'}" [options]="estatusVisa" optionLabel="nombre" datakey="id" formControlName="estatusVisa"></p-dropdown>
+                                            <p-dropdown [style]="{'width':'100%'}" [options]="estatusVisa" optionLabel="nombre" datakey="_id" formControlName="estatusVisa"></p-dropdown>
                                             <label for="estatusVisa">Seleccionar estatus visa</label>
                                         </span>
                                     </div>
@@ -262,7 +268,7 @@
                                 <div class="row col-md-12 m-0">
                                     <div class="form-group col-md-3">
                                         <span class="ui-float-label">
-                                            <p-dropdown [style]="{'width':'100%'}" [options]="consulado" optionLabel="nombre" datakey="id" formControlName="consulado"></p-dropdown>
+                                            <p-dropdown [style]="{'width':'100%'}" [options]="consulado" optionLabel="nombre" datakey="_id" formControlName="consulado"></p-dropdown>
                                             <label for="consulado">Seleccionar consulado</label>
                                         </span>
                                     </div>
@@ -277,7 +283,7 @@
                     </div>
                     <div class="row justify-content-end mt-2">
                         <h4 class="header-h3 mt-2">
-                            Total a pagar: {{ (this.total * 150) | currency}}
+                            Total a pagar: {{ (this.total * this.totalService) | currency}}
                         </h4>
                         <div formGroupName="data"  class="form-group col-3">
                             <span class="ui-float-label">

@@ -4,6 +4,7 @@ import { ClientesService } from '../../services/clientes/clientes.service';
 import { faEdit } from '@fortawesome/free-solid-svg-icons';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
+import { ConfiguracionService } from '../../services/configuracion/configuracion.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -14,20 +15,31 @@ export class DashboardComponent implements OnInit {
   files: TreeNode[];
   cols: any[];
   data =  [];
+  estatusGeneral = [];
   estatus = [];
   estatusVisa = [];
   estatusTitulo = 'Estatus general'
   id = '5e8021aedb715f43a0a22cbe';
   faEdit = faEdit;
   filters: FormGroup;
-  constructor(public clientService: ClientesService, private fb: FormBuilder, private router: Router) { }
+  value;
+  constructor(public clientService: ClientesService, private fb: FormBuilder, private router: Router, private configuracion: ConfiguracionService) { }
 
   ngOnInit() {
-    this.setEstatus(0);
-    this.setEstatusvisa(0);
+    this.value = new Date();
+    // this.setEstatus('');
+    // this.setEstatusvisa(0);
     this.clientService.GetClients().subscribe((result: any) => {
     this.files = result;
   });
+
+  this.configuracion.obtenerEstatusGeneral().subscribe((res: any) => {
+    this.estatusGeneral = res.estatusGeneral;
+  });
+
+  this.configuracion.obtenerEstatusVisa().subscribe((res: any) => {
+    this.estatusVisa = res.estatusvisa;
+  })
 
     this.cols = [
       { field: 'nombre', header: 'Nombre' },
@@ -51,31 +63,31 @@ export class DashboardComponent implements OnInit {
    this.files = [];
    this.files = event;
   }
-  setEstatus(id: number) {
-    this.estatus = [
-      { id: 1, nombre: 'Nuevo cliente', key: 'N-C', color: '#003049' },
-      { id: 2, nombre: 'Llenando cuestionario', key: 'Ll-C', color: '#f77f00' },
-      { id: 3, nombre: 'En proceso DS160', key: 'P-DS', color: '#90be6d' },
-      { id: 4, nombre: 'En proceso pago visa', key: 'P-PV', color: '#05668d' },
-      { id: 5, nombre: 'Citas programadas', key: 'C-P', color: '#70c1b3' },
-      { id: 6, nombre: 'Cancelada', key: 'C', color: '#d62828' }
-    ]
-    if (id !== 0) {
-      return this.estatus.find(x => x.id === id);
-    }
-}
-setEstatusvisa(id: number) {
-  this.estatusVisa = [
-    { id: 1, nombre: 'En tramite', key: 'T', color: '#118ab2' },
-    { id: 2, nombre: 'Aprobada', key: 'A', color: '#43aa8b' },
-    { id: 3, nombre: 'Rechazada', key: 'R', color: '#ef476f' },
-    { id: 4, nombre: 'En investigacion', key: 'I', color: '#ffd166' },
-    { id: 5, nombre: 'Cancelada', key: 'C', color: '#d62828' }
-  ]
-  if (id !== 0) {
-    return this.estatusVisa.find(x => x.id === id);
+
+  setEstatusColor(id: string) {
+    if (this.estatusGeneral && this.estatusGeneral.length > 0) {
+      return this.estatusGeneral.find(x => x._id === id).color;
+     }
   }
-}
+
+  setEstatusCode(id: string) {
+    if (this.estatusGeneral && this.estatusGeneral.length > 0) {
+     return this.estatusGeneral.find(x => x._id === id).abre;
+    }
+  }
+
+  setEstatusvisaColor(id: string) {
+    if (this.estatusVisa && this.estatusVisa.length > 0) {
+      return this.estatusVisa.find(x => x._id === id).color;
+    }
+  }
+
+  setEstatusVisaCode(id: string) {
+    if (this.estatusVisa && this.estatusVisa.length > 0) {
+      return this.estatusVisa.find(x => x._id === id).abre;
+    }
+  }
+
 
 setEstatusPago() {
   

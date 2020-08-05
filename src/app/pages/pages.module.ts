@@ -15,6 +15,8 @@ import {ButtonModule} from 'primeng/button';
 import {CalendarModule} from 'primeng/calendar';
 import {TableModule} from 'primeng/table';
 import {InputTextareaModule} from 'primeng/inputtextarea';
+import {ColorPickerModule} from 'primeng/colorpicker';
+import {InputMaskModule} from 'primeng/inputmask';
 /////// Font Awesome \\\\\\\\\
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -85,6 +87,8 @@ import { ConfiguracionComponent } from './configuracion/configuracion.component'
         CalendarModule,
         TableModule,
         InputTextareaModule,
+        ColorPickerModule,
+        InputMaskModule,
         DropdownModule,
         FontAwesomeModule,
         NgbModule,

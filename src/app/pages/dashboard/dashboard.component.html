@@ -1,9 +1,10 @@
 <div class="row">
     <div class="col-lg-12">
         <div class="card">
+            <p-calendar [(ngModel)]="value" view="month" dateFormat="mm/yy" [yearNavigator]="true" yearRange="2020:2021"></p-calendar>
             <div class="card-body" style="padding: 2%;">
                 <h6 class="m-0 headerText">Estatus general</h6>
-                <app-head-estatus [Titulo]="estatusTitulo" [estatus]="estatus"></app-head-estatus>
+                <app-head-estatus [Titulo]="estatusTitulo" [estatus]="estatusGeneral"></app-head-estatus>
                 <h6 class="m-0 headerText">Estatus visa</h6>
                 <app-head-estatus [Titulo]="estatusTitulo" [estatus]="estatusVisa"></app-head-estatus>
                 <app-filters (filterResult)="filteResult($event)"></app-filters>
@@ -39,8 +40,8 @@
                             <td class="priority-2 text-right">{{rowData.importeRecibido | currency}}</td>
                             <td class="priority-2">{{rowData.createdAt | date: 'short'}}</td>
                             <td class="text-center">
-                                <span class="badge m-1" [ngStyle]="{'background-color': setEstatus(rowData.estatus).color}">{{setEstatus(rowData.estatus).key }}</span>
-                                <span class="badge m-1" [ngStyle]="{'background-color': setEstatusvisa(rowData.estatusVisa).color}">{{setEstatusvisa(rowData.estatusVisa).key }}</span>
+                               <span class="badge m-1" [ngStyle]="{'background-color': setEstatusColor(rowData.estatus) }"> {{ setEstatusCode(rowData.estatus) }}</span> 
+                               <span class="badge m-1" [ngStyle]="{'background-color': setEstatusvisaColor(rowData.estatusVisa)}">{{ setEstatusVisaCode(rowData.estatusVisa) }}</span>
                             </td>
                             <td class="text-center"><fa-icon (click)="editar(rowNode)" style="cursor: pointer;" [icon]="faEdit"></fa-icon></td>
                         </tr>            

@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { ClientesService } from '../../services/clientes/clientes.service';
 import { FormBuilder, FormArray, FormGroup, Validators, FormControl } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { faTrash, faPlus, faSave, faArrowAltCircleLeft } from '@fortawesome/free-solid-svg-icons';
 import * as moment from 'moment';
 import { ControlsValidationService } from '../../services/controls/controls-validation.service';
+import { ConfiguracionService } from '../../services/configuracion/configuracion.service';
 
 
 @Component({
@@ -12,9 +13,10 @@ import { ControlsValidationService } from '../../services/controls/controls-vali
   templateUrl: './clientes.component.html',
   styleUrls: ['./clientes.component.css']
 })
-export class ClientesComponent implements OnInit {
+export class ClientesComponent implements OnInit, AfterViewInit {
   dynamicForm: FormGroup;
   maxDate = new Date();
+  estatusGeneral = [];
   estatus = [];
   estatusVisa = [];
   consulado = [];
@@ -22,22 +24,38 @@ export class ClientesComponent implements OnInit {
   id: string;
   textBoton: string;
   total: number = 1;
+  precio = [];
+  totalService = 0;
   faTrash = faTrash; faAdd = faPlus; faSave = faSave; faArrowAltCircleLeft = faArrowAltCircleLeft;
   constructor(private formBuilder: FormBuilder,
               public clienteService: ClientesService,
               private route: ActivatedRoute,
               private router: Router,
-              private validationControl: ControlsValidationService
+              private validationControl: ControlsValidationService,
+              private configuracion: ConfiguracionService
               ) { }
   get f() { return this.dynamicForm.controls; }
   get c() { return this.f.children as FormArray; }
   get tt() { return this.dynamicForm ? this.total = this.c.controls.length + 1 : this.total = 1  }
   get ttl() { return this.total = this.total - 1 }
 
+  ngAfterViewInit() {
+    this.configuracion.obtenerPrecios().subscribe((res: any) => {
+      this.precio = res.precio;
+      this.totalService = this.precio[0].nombre;
+    });
+  }
+
   ngOnInit() {
-    this.setEstatus(0);
-    this.setEstatusvisa(0);
-    this.setConsulados(0);
+      this.configuracion.obtenerEstatusGeneral().subscribe((res: any) => {
+      this.estatusGeneral = res.estatusGeneral;
+    });
+    this.configuracion.obtenerEstatusVisa().subscribe((res: any) => {
+      this.estatusVisa = res.estatusvisa;
+    });
+    this.configuracion.obtenerConsulado().subscribe((res: any) => {
+      this.consulado = res.consulados;
+    });
     this.dynamicForm = this.formBuilder.group({
       _id: [''],
       data: this.formBuilder.group({
@@ -48,18 +66,18 @@ export class ClientesComponent implements OnInit {
         contrasena: ['', Validators.required],
         telefono: ['', Validators.required],
         fechaNacimiento: [null],
-        estatus: [1],
+        estatus: [''],
         noPasaporte: [''],
         fechaCitaPasaporte: [null],
         fechaExpedicion: [null],
         fechaVencimiento: [null],
         ciudadExpedicion: [''],
         ds160: [''],
-        estatusVisa: [1],
+        estatusVisa: [''],
         fechaCitaVisa: [null],
         fechaCAS: [null],
         fechaConsulado: [null],
-        consulado: [0],
+        consulado: [''],
         total: [0],
         importeRecibido: [0],
         createdAt: [new Date()],
@@ -85,18 +103,18 @@ export class ClientesComponent implements OnInit {
       contrasena: ['', Validators.required],
       telefono: ['', Validators.required],
       fechaNacimiento: [null],
-      estatus: [1],
+      estatus: [''],
       noPasaporte: [''],
       fechaCitaPasaporte: [null],
       fechaExpedicion: [null],
       fechaVencimiento: [''],
       ciudadExpedicion: [''],
       ds160: [''],
-      estatusVisa: [1],
+      estatusVisa: [''],
       fechaCitaVisa: [null],
       fechaCAS: [null],
       fechaConsulado: [null],
-      consulado: [0],
+      consulado: [''],
       createdAt: [new Date()],
       updatedAt: [null]
     }))
@@ -196,9 +214,10 @@ export class ClientesComponent implements OnInit {
     const finalObj: any = {};
     // finalObj._id = obj._id;
     finalObj.data = obj.data;
-    finalObj.data.estatus = finalObj.data.estatus.id ? finalObj.data.estatus.id : 1;
-    finalObj.data.estatusVisa = finalObj.data.estatusVisa.id ? finalObj.data.estatusVisa.id : 1;
-    finalObj.data.consulado = finalObj.data.consulado.id ? finalObj.data.consulado.id : 0;
+    finalObj.data.estatus = finalObj.data.estatus._id ? finalObj.data.estatus._id : '';
+    finalObj.data.estatusVisa = finalObj.data.estatusVisa._id ? finalObj.data.estatusVisa._id : '';
+    finalObj.data.consulado = finalObj.data.consulado._id ? finalObj.data.consulado._id : '';
+    finalObj.data.total = ( this.total * this.precio[0].nombre ) | 0;
     // finalObj.data.fechaNacimiento ? finalObj.data.fechaNacimiento = moment(finalObj.data.fechaNacimiento).format('YYYY-MM-DD HH:mm:ss') : null;
     this.hascliente ? finalObj.data.updatedAt = new Date() : finalObj.data.updatedAt = null;
     finalObj.children = obj.children.map(x =>
@@ -209,18 +228,18 @@ export class ClientesComponent implements OnInit {
                   contrasena: x.contrasena,
                   telefono: x.telefono,
                   fechaNacimiento: x.fechaNacimiento,
-                  estatus: x.estatus.id ? x.estatus.id : 1,
+                  estatus: x.estatus._id ? x.estatus._id : '',
                   noPasaporte: x.noPasaporte,
                   fechaCitaPasaporte: x.fechaCitaPasaporte,
                   fechaExpedicion: x.fechaExpedicion,
                   fechaVencimiento: x.fechaVencimiento,
                   ciudadExpedicion: x.ciudadExpedicion,
                   ds160: x.ds160,
-                  estatusVisa: x.estatusVisa.id ? x.estatusVisa.id : 1,
+                  estatusVisa: x.estatusVisa._id ? x.estatusVisa._id : '',
                   fechaCitaVisa: x.fechaCitaVisa,
                   fechaCAS: x.fechaCAS,
                   fechaConsulado: x.fechaConsulado,
-                  consulado: x.consulado.id ? x.consulado.id : 0,
+                  consulado: x.consulado._id ? x.consulado._id : '',
                   createdAt: x.createdAt ? x.createdAt : new Date(),
                   updatedAt: this.hascliente ? new Date() : null
                  },
@@ -230,48 +249,20 @@ export class ClientesComponent implements OnInit {
     return final;
   }
 
-  setEstatus(id: number) {
-      this.estatus = [
-        { id: 1, nombre: 'Nuevo cliente' },
-        { id: 2, nombre: 'Llenando cuestionario' },
-        { id: 3, nombre: 'En proceso DS160' },
-        { id: 4, nombre: 'En proceso pago visa' },
-        { id: 5, nombre: 'Citas programadas' },
-        { id: 6, nombre: 'Cancelada' }
-      ]
-      if (id !== 0) {
-        return this.estatus.find(x => x.id === id);
-      }
+  setEstatus(id: string) {
+    if (this.estatusGeneral && this.estatusGeneral.length > 0) {
+      return this.estatusGeneral.find(x => x._id === id);
+    }
   }
-  setEstatusvisa(id: number) {
-    this.estatusVisa = [
-      { id: 1, nombre: 'En tramite' },
-      { id: 2, nombre: 'Aprobada' },
-      { id: 3, nombre: 'Rechazada' },
-      { id: 4, nombre: 'En investigacion' },
-      { id: 5, nombre: 'Cancelada' }
-    ]
-    if (id !== 0) {
-      return this.estatusVisa.find(x => x.id === id);
+  setEstatusvisa(id: string) {
+    if (this.estatusVisa && this.estatusVisa.length > 0) {
+      return this.estatusVisa.find(x => x._id === id);
     }
   }
 
-  setConsulados(id: number) {
-    this.consulado = [
-      { id: 0, nombre: 'Seleccionar...' },
-      { id: 1, nombre: 'Ciudad Juárez' },
-      { id: 2, nombre: 'Guadalajara' },
-      { id: 3, nombre: 'Hermosillo' },
-      { id: 4, nombre: 'Matamoros' },
-      { id: 5, nombre: 'Monterrey' },
-      { id: 6, nombre: 'Nogales' },
-      { id: 7, nombre: 'Nuevo Laredo' },
-      { id: 8, nombre: 'Tijuana' },
-    ]
-    if (id !== 0) {
-      return this.consulado.find(x => x.id === id);
-    } else {
-      return this.consulado.find(x => x.id === 0);
+  setConsulados(id: string) {
+    if (this.consulado && this.consulado.length > 0) {
+      return this.consulado.find(x => x._id === id);
     }
   }
 
