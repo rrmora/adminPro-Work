@@ -17,6 +17,7 @@ import {TableModule} from 'primeng/table';
 import {InputTextareaModule} from 'primeng/inputtextarea';
 import {ColorPickerModule} from 'primeng/colorpicker';
 import {InputMaskModule} from 'primeng/inputmask';
+import {InputNumberModule} from 'primeng/inputnumber';
 /////// Font Awesome \\\\\\\\\
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -89,6 +90,7 @@ import { ConfiguracionComponent } from './configuracion/configuracion.component'
         InputTextareaModule,
         ColorPickerModule,
         InputMaskModule,
+        InputNumberModule,
         DropdownModule,
         FontAwesomeModule,
         NgbModule,

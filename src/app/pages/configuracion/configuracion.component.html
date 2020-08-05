@@ -164,8 +164,9 @@
                             <div class="col-lg-9" style="margin-top: 12px;">
                                 <div [formGroup]="formPrecio" class="form-group col-md-12">
                                     <span class="ui-float-label">
-                                        <input class="col-md-12" formControlName="nombre" id="nombre4" type="text" pInputText>
-                                        <label for="nombre">Precio</label>
+                                        <!-- <input class="col-md-12" formControlName="nombre" id="nombre4" type="text" pInputText> -->
+                                        <p-inputNumber placeholder="Precio" formControlName="nombre" id="nombre" mode="currency" currency="USD" locale="en-US" [min]="1"></p-inputNumber>                                    
+                                        <!-- <label for="nombre">Precio</label> -->
                                     </span>
                                     <small style="color: red;" *ngIf="(formPrecio.get('nombre').touched || formPrecio.get('nombre').dirty ) &&
                                     !formPrecio.get('nombre').valid">Este campo es requerido *</small>

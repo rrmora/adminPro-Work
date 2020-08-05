@@ -30,7 +30,7 @@
     "ng2-charts": "^2.2.3",
     "ngx-toastr": "^11.3.3",
     "primeicons": "^2.0.0",
-    "primeng": "^9.0.5",
+    "primeng": "^9.1.0",
     "rxjs": "~6.5.3",
     "sweetalert2": "^9.3.17",
     "tslib": "^1.9.0",

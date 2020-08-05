@@ -6,7 +6,7 @@
                 <br>
                 <form [formGroup]="dynamicForm" novalidate>
                     <div class="form-body">
-                        <h4 class="header-h3">Datos Personales</h4>
+                        <h4 class="header-h4">Datos Personales</h4>
                         <div formGroupName="data" class="row">
                             <div  class="form-group col-md-3">
                                 <span class="ui-float-label">
@@ -70,7 +70,7 @@
                                 !dynamicForm.controls.data.get('telefono').valid">Este campo es requerido *</small>
                             </div>
                         </div>
-                        <h4 class="header-h3">Datos Pasaporte</h4>
+                        <h4 class="header-h4">Datos Pasaporte</h4>
                         <div formGroupName="data" class="row">
                             <div  class="form-group col-md-3">
                                 <span class="ui-float-label">
@@ -98,7 +98,7 @@
                                 </span>
                             </div>
                         </div>
-                        <h4 class="header-h3">Datos Visa</h4>
+                        <h4 class="header-h4">Datos Visa</h4>
                         <div formGroupName="data" class="row">
                             <div  class="form-group col-md-3">
                                 <span class="ui-float-label">
@@ -142,7 +142,7 @@
                                 <div class="row col-md-12 m-0">
                                     <hr style="height: 5px; color: grey; width: 100%;">
                                 </div>
-                                <h4 class="header-h3 ml-4">Datos Personales</h4>
+                                <h4 class="header-h4 ml-4">Datos Personales</h4>
                                 <br><br>
                                 <div class="row col-md-12 m-0">
                                     <div  class="form-group col-md-3">
@@ -207,7 +207,7 @@
                                         !cliente.get('telefono').valid">Este campo es requerido *</small>
                                     </div>
                                 </div>
-                                <h4 class="header-h3 ml-4">Datos Pasaporte</h4>
+                                <h4 class="header-h4 ml-4">Datos Pasaporte</h4>
                                 <br><br>
                                 <div class="row col-md-12 m-0">
                                     <div  class="form-group col-md-3">
@@ -236,7 +236,7 @@
                                         </span>
                                     </div>
                                 </div>
-                                <h4 class="header-h3 ml-4">Datos visa</h4>
+                                <h4 class="header-h4 ml-4">Datos visa</h4>
                                 <br><br>
                                 <div class="row col-md-12 m-0">
                                     <div  class="form-group col-md-3">
@@ -282,14 +282,18 @@
                         </div>
                     </div>
                     <div class="row justify-content-end mt-2">
-                        <h4 class="header-h3 mt-2">
+                        <h4 class="header-h3">
                             Total a pagar: {{ (this.total * this.totalService) | currency}}
                         </h4>
                         <div formGroupName="data"  class="form-group col-3">
-                            <span class="ui-float-label">
-                                <input class="col-md-12" formControlName="importeRecibido" id="importeRecibido" type="text" pInputText>
+                            <div class="row m-0">
                                 <label for="importeRecibido">Importe recibido:</label>
-                            </span>
+                            </div>
+                            <!-- <span class="ui-float-label"> -->
+                                <!-- <input class="col-md-12" formControlName="importeRecibido" id="importeRecibido" type="text" pInputText> -->
+                                <p-inputNumber formControlName="importeRecibido" id="importeRecibido" mode="currency" currency="USD" locale="en-US" [min]="1"></p-inputNumber>
+                                <!-- <label for="importeRecibido">Importe recibido:</label> -->
+                            <!-- </span> -->
                         </div>
                     </div>
                     <div class="row">
